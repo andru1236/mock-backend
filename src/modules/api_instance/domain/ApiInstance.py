@@ -14,8 +14,10 @@ class ApiInstance(IAggregate):
         self.routes: List[Route] = routes
 
     def add_route(self, new_route: Route):
+        self.__this_route_is_registered(new_route)
+        self.routes.append(new_route)
+
+    def __this_route_is_registered(self, new_route: Route):
         for route in self.routes:
             if new_route.value == route.value and new_route.method == route.method:
                 raise DomainBadRequestError(f'This route [{new_route.method}] {new_route.value} is busy')
-
-        self.routes.append(new_route)

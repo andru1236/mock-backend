@@ -11,6 +11,7 @@ class Route:
     METHODS = [GET, POST, UPDATE, DELETE, PATH]
 
     def __init__(self, path: str, method: str, response: Response = None) -> None:
+        method = method.upper()
 
         if not method in Route.METHODS:
             raise DomainBadRequestError(f'Method: {method} is invalid')
