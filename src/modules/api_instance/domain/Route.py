@@ -3,9 +3,21 @@ from modules.shared.domain.errors import DomainBadRequestError
 
 
 class Route:
-    def __init__(self, path: str, response: Response = None) -> None:
+    GET = 'GET'
+    POST = 'POST'
+    UPDATE = 'UPDATE'
+    DELETE = 'DELETE'
+    PATH = 'PATH'
+    METHODS = [GET, POST, UPDATE, DELETE, PATH]
+
+    def __init__(self, path: str, method: str, response: Response = None) -> None:
+
+        if not method in Route.METHODS:
+            raise DomainBadRequestError(f'Method: {method} is invalid')
+
         if not isinstance(path, str):
-            raise DomainBadRequestError(f'this path {path} is not valid')
+            raise DomainBadRequestError(f'This path {path} is not valid')
 
         self.value = path
+        self.method = method
         self.response = response
