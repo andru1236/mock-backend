@@ -2,12 +2,14 @@ from typing import List
 
 from modules.api_instance.domain import Port
 from modules.api_instance.domain import Route
+from modules.shared.domain import IAggregate
 from modules.shared.domain.errors import DomainBadRequestError
 
 
-class ApiInstance:
+class ApiInstance(IAggregate):
 
     def __init__(self, port: Port, routes=None) -> None:
+        super().__init__()
         self.port: Port = port
         self.routes: List[Route] = routes
 
