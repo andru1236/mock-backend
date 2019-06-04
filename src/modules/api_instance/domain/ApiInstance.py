@@ -1,7 +1,7 @@
 from typing import List
 
-from modules.mock_api.domain import Port
-from modules.mock_api.domain import Route
+from modules.api_instance.domain import Port
+from modules.api_instance.domain import Route
 
 
 class ApiInstance:

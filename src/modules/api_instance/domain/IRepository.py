@@ -1,4 +1,4 @@
-from modules.mock_api.domain import ApiInstance
+from modules.api_instance.domain import ApiInstance
 
 
 class IRepository:
