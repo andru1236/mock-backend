@@ -18,18 +18,12 @@ class Repository(IRepository):
         self.__db = self.__db[self.__name_repository]
 
     def save(self, api_instance: ApiInstance) -> None:
-        api_instance_dict = {
-            'port': api_instance.port.value,
-            'routes': self.__convert_routes_to_dict(api_instance.routes),
-            'settings': {
-                'created_on': api_instance.settings.created_on,
-                'enabled': api_instance.settings.enabled
-            }
-        }
+        api_instance_dict = api_instance.get_object_dict()
 
         if api_instance._id is "":
             self.__db.insert(api_instance_dict)
         else:
+            del api_instance_dict['_id']
             self.__db.update_one({'_id': ObjectId(api_instance._id)}, {
                 '$set': api_instance_dict
             })
@@ -39,9 +33,3 @@ class Repository(IRepository):
 
     def delete(self, api_id: str) -> None:
         super().delete(api_id)
-
-    def __convert_routes_to_dict(self, routes: List[Route]):
-        if routes is None:
-            return []
-
-        return list(map(lambda route: route.get_object_dict(), routes))
