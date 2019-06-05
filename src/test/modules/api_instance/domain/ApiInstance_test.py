@@ -27,3 +27,15 @@ def test_add_route_to_api(get_port, get_routes_crud):
     assert count_routes + 1 == len(api.routes)
 
 
+@pytest.mark.usefixtures('get_port', 'get_routes_crud')
+def test_replace_route(get_port, get_routes_crud):
+    api = ApiInstance(get_port, get_routes_crud)
+    new_route = Route('users', 'delete', Response('{"status": 200}'))
+    for route in api.routes:
+        if route.path == new_route.path and route.method == new_route.method:
+            assert route.response.value != new_route.response
+
+    api.replace_route(new_route)
+    for route in api.routes:
+        if route.path == new_route.path and route.method == new_route.method:
+            assert route.response == new_route.response
