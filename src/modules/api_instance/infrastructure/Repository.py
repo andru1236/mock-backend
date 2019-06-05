@@ -18,6 +18,7 @@ class Repository(IRepository):
         api_instance_dict = api_instance.get_object_dict()
 
         if api_instance._id is "":
+            del api_instance._id
             self.__db.insert(api_instance_dict)
         else:
             del api_instance_dict['_id']
