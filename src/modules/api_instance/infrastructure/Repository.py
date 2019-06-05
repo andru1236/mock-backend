@@ -6,6 +6,7 @@ from modules.api_instance.domain import Port
 from modules.api_instance.domain import Response
 from modules.api_instance.domain import Route
 from modules.api_instance.domain import Settings
+from modules.shared.domain.errors import DomainBadRequestError
 from modules.shared.domain.errors import DomainDontFoundError
 
 from modules.shared.infrastructure import MongoConnection
@@ -51,4 +52,6 @@ class Repository(IRepository):
         )
 
     def delete(self, api_id: str) -> None:
-        super().delete(api_id)
+        delete_count = self.__db.delete_one({'_id': ObjectId(api_id)}).deleted_count
+        if delete_count == 0:
+            raise DomainBadRequestError(f'This api {api_id} not exist')
