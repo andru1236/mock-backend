@@ -14,8 +14,7 @@ class Route(IEntity):
     METHODS = [GET, POST, UPDATE, DELETE, PATH]
 
     def __init__(self, path: str, method: str, response: Response = None) -> None:
-        id = str(ObjectId())
-        super(id).__init__()
+        super().__init__(str(ObjectId()))
         method = method.upper()
 
         if not method in Route.METHODS:
