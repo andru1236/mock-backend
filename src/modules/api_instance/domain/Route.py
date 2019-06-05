@@ -37,6 +37,7 @@ class Route(IEntity):
         route_dict = {
             '_id': self._id,
             'method': self.method,
-            'path': self.path
+            'path': self.path,
+            'response': self.response.value
         }
         return route_dict
