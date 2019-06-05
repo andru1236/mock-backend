@@ -22,9 +22,19 @@ class ApiInstance(IAggregate):
         if not self.__this_route_is_registered_in_routes(new_route):
             raise DomainBadRequestError(f'This route [{new_route.method}] {new_route.value} not exist')
 
-        new_routes = list(filter(lambda x: not self.__these_routes_are_equals(x, new_route), self.routes))
+        new_routes = self.__get_list_without_route(new_route)
+
         new_routes.append(new_route)
         self.routes = new_routes
+
+    def remove_route(self, route):
+        if not self.__this_route_is_registered_in_routes(route):
+            raise DomainBadRequestError(f'This route [{route.method}] {route.value} not exist')
+
+        self.routes = self.__get_list_without_route(route)
+
+    def __get_list_without_route(self, route: Route) -> List[Route]:
+        return list(filter(lambda x: not self.__these_routes_are_equals(x, route), self.routes))
 
     def __this_route_is_registered_in_routes(self, new_route: Route) -> bool:
         for route in self.routes:
