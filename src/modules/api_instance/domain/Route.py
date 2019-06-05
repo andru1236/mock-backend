@@ -13,8 +13,8 @@ class Route(IEntity):
     PATCH = 'PATCH'
     METHODS = [GET, POST, PUT, DELETE, PATCH]
 
-    def __init__(self, path: str, method: str, response: Response = None) -> None:
-        super().__init__(str(ObjectId()))
+    def __init__(self, path: str, method: str, response: Response = None, _id: str = str(ObjectId())) -> None:
+        super().__init__(_id)
         method = method.upper()
 
         if not method in Route.METHODS:
