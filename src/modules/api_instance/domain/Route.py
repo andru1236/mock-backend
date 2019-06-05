@@ -8,10 +8,10 @@ from modules.shared.domain.errors import DomainBadRequestError
 class Route(IEntity):
     GET = 'GET'
     POST = 'POST'
-    UPDATE = 'UPDATE'
+    PUT = 'PUT'
     DELETE = 'DELETE'
-    PATH = 'PATH'
-    METHODS = [GET, POST, UPDATE, DELETE, PATH]
+    PATCH = 'PATCH'
+    METHODS = [GET, POST, PUT, DELETE, PATCH]
 
     def __init__(self, path: str, method: str, response: Response = None) -> None:
         super().__init__(str(ObjectId()))
@@ -23,12 +23,20 @@ class Route(IEntity):
         if not isinstance(path, str):
             raise DomainBadRequestError(f'This path {path} is not valid')
 
-        self.value = path
+        self.path = path
         self.method = method
         self.response = response
 
     def is_equals(self, route):
         return (
-                self.value == route.value
+                self.path == route.value
                 and self.method == route.method
         )
+
+    def get_dict_object(self):
+        route_dict = {
+            '_id': self._id,
+            'method': self.method,
+            'path': self.path
+        }
+        return route_dict

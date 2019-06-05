@@ -12,12 +12,12 @@ class ApiInstance(IAggregate):
     def __init__(self, port: Port, routes=None, settings: Settings = Settings()) -> None:
         super().__init__()
         self.port: Port = port
-        self.routes: List[Route] = routes
+        self.routes: List[Route] = [] if routes is None else routes
         self.settings = settings
 
     def add_route(self, new_route: Route):
         if self.__this_route_is_registered_in_routes(new_route):
-            raise DomainBadRequestError(f'This route [{new_route.method}] {new_route.value} is busy')
+            raise DomainBadRequestError(f'This route [{new_route.method}] {new_route.path} is busy')
         self.routes.append(new_route)
 
     def replace_route(self, new_route):
