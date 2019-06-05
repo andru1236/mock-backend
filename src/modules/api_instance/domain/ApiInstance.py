@@ -14,10 +14,25 @@ class ApiInstance(IAggregate):
         self.routes: List[Route] = routes
 
     def add_route(self, new_route: Route):
-        self.__this_route_is_registered(new_route)
+        if self.__this_route_is_registered_in_routes(new_route):
+            raise DomainBadRequestError(f'This route [{new_route.method}] {new_route.value} is busy')
         self.routes.append(new_route)
 
-    def __this_route_is_registered(self, new_route: Route):
+    def replace_route(self, new_route):
+        if not self.__this_route_is_registered_in_routes(new_route):
+            raise DomainBadRequestError(f'This route [{new_route.method}] {new_route.value} not exist')
+
+        new_routes = list(filter(lambda x: not self.__these_routes_are_equals(x, new_route), self.routes))
+        new_routes.append(new_route)
+        self.routes = new_routes
+
+    def __this_route_is_registered_in_routes(self, new_route: Route) -> bool:
         for route in self.routes:
-            if new_route.value == route.value and new_route.method == route.method:
-                raise DomainBadRequestError(f'This route [{new_route.method}] {new_route.value} is busy')
+            if self.__these_routes_are_equals(route, new_route):
+                return True
+        return False
+
+    def __these_routes_are_equals(self, route: Route, new_route: Route):
+        if new_route.value == route.value and new_route.method == route.method:
+            return True
+        return False
