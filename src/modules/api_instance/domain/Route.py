@@ -1,8 +1,11 @@
+from bson.objectid import ObjectId
+
 from modules.api_instance.domain import Response
+from modules.shared.domain import IEntity
 from modules.shared.domain.errors import DomainBadRequestError
 
 
-class Route:
+class Route(IEntity):
     GET = 'GET'
     POST = 'POST'
     UPDATE = 'UPDATE'
@@ -11,6 +14,8 @@ class Route:
     METHODS = [GET, POST, UPDATE, DELETE, PATH]
 
     def __init__(self, path: str, method: str, response: Response = None) -> None:
+        id = str(ObjectId())
+        super(id).__init__()
         method = method.upper()
 
         if not method in Route.METHODS:
