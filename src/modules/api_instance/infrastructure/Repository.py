@@ -1,5 +1,7 @@
 from typing import List
 
+from bson import ObjectId
+
 from modules.api_instance.domain import ApiInstance
 from modules.api_instance.domain import IRepository
 from modules.api_instance.domain import Route
@@ -24,7 +26,13 @@ class Repository(IRepository):
                 'enabled': api_instance.settings.enabled
             }
         }
-        self.__db.insert(api_instance_dict)
+
+        if api_instance._id is "":
+            self.__db.insert(api_instance_dict)
+        else:
+            self.__db.update_one({'_id': ObjectId(api_instance._id)}, {
+                '$set': api_instance_dict
+            })
 
     def search(self, api_id: str) -> ApiInstance:
         return super().search(api_id)
