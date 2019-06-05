@@ -128,3 +128,5 @@ dmypy.json
 .vscode
 idea/
 .idea/**
+
+.mogno_data
