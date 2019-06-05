@@ -1,14 +1,16 @@
 from modules.api_instance.domain import IRepository
+from modules.api_instance.domain import Response
 from modules.api_instance.domain import Route
 from modules.shared.domain import ICommand
 from modules.shared.domain import IUseCase
 
 
 class AddRouteCommand(ICommand):
-    def __init__(self, api_id: str, path: str, method: str) -> None:
+    def __init__(self, api_id: str, path: str, method: str, response: str) -> None:
         self.api_id = api_id
         self.path = path
         self.method = method
+        self.response = response
 
 
 class AddRoute(IUseCase):
@@ -17,7 +19,7 @@ class AddRoute(IUseCase):
         self.repository = repository
 
     def execute(self, command: AddRouteCommand):
-        route = Route(command.path, command.method)
+        route = Route(command.path, command.method, Response(command.response))
         api = self.repository.search(command.api_id)
         api.add_route(route)
         self.repository.save(api)
