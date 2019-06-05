@@ -22,3 +22,10 @@ class Route:
         self.value = path
         self.method = method
         self.response = response
+
+    def is_equals(self, route):
+        return (
+                self.value == route.value
+                and self.method == route.method
+                and self.response.value == route.response.value
+        )
