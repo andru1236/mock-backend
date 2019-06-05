@@ -3,6 +3,11 @@ from modules.api_instance.domain import Port
 from modules.shared.domain.errors import DomainBadRequestError
 
 
+@pytest.fixture
+def get_port(number_port=8000):
+    return Port(number_port)
+
+
 def test_create_port_success():
     test_port = 8000
     port = Port(test_port)
