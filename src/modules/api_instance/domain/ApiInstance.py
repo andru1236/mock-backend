@@ -34,15 +34,10 @@ class ApiInstance(IAggregate):
         self.routes = self.__get_list_without_route(route)
 
     def __get_list_without_route(self, route: Route) -> List[Route]:
-        return list(filter(lambda x: not self.__these_routes_are_equals(x, route), self.routes))
+        return list(filter(lambda x: not route.is_equals(x), self.routes))
 
     def __this_route_is_registered_in_routes(self, new_route: Route) -> bool:
         for route in self.routes:
-            if self.__these_routes_are_equals(route, new_route):
+            if route.is_equals(new_route):
                 return True
-        return False
-
-    def __these_routes_are_equals(self, route: Route, new_route: Route):
-        if new_route.value == route.value and new_route.method == route.method:
-            return True
         return False

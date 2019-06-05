@@ -27,5 +27,4 @@ class Route:
         return (
                 self.value == route.value
                 and self.method == route.method
-                and self.response.value == route.response.value
         )
