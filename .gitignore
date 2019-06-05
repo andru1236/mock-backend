@@ -129,4 +129,4 @@ dmypy.json
 idea/
 .idea/**
 
-.mogno_data
+.mongo_data
