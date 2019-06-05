@@ -6,7 +6,7 @@ from modules.shared.domain.errors import DomainBadRequestError
 
 
 @pytest.fixture
-def get_routes_crud():
+def get_users_routes_crud():
     path = 'users'
     methods = ['get', 'post', 'put', 'delete']
     generic_response = Response('{"json_test": "value_json"}')
