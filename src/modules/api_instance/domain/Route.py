@@ -17,7 +17,7 @@ class Route(IEntity):
         super().__init__(_id)
         method = method.upper()
 
-        if not method in Route.METHODS:
+        if method not in Route.METHODS:
             raise DomainBadRequestError(f'Method: {method} is invalid')
 
         if not isinstance(path, str):
@@ -29,11 +29,11 @@ class Route(IEntity):
 
     def is_equals(self, route):
         return (
-                self.path == route.value
+                self.path == route.path
                 and self.method == route.method
         )
 
-    def get_dict_object(self):
+    def get_object_dict(self):
         route_dict = {
             '_id': self._id,
             'method': self.method,

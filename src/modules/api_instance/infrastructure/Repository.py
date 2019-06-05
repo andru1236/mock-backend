@@ -44,4 +44,4 @@ class Repository(IRepository):
         if routes is None:
             return []
 
-        return list(map(lambda route: route.get_dict_object(), routes))
+        return list(map(lambda route: route.get_object_dict(), routes))
