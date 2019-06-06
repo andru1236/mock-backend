@@ -1,6 +1,8 @@
 from flask import Blueprint
 from flask_restplus import Api
 
+from backend.controllers import api_instance_controller
+
 
 class ApiV1:
 
@@ -10,6 +12,7 @@ class ApiV1:
 
         self.controllers = [
             # TODO: Add controlers to app
+            api_instance_controller
         ]
 
         self.build_controllers()
