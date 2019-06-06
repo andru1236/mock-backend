@@ -2,6 +2,7 @@ from modules.api_instance.domain import IRepository
 from modules.shared.domain import IQuery
 from modules.shared.domain import IResponse
 from modules.shared.domain import IUseCase
+from modules.shared.infrastructure import logger
 
 
 class SearchApiQuery(IQuery):
@@ -24,5 +25,6 @@ class SearchApi(IUseCase):
         self.repository = repository
 
     def execute(self, command: SearchApiQuery):
+        logger.info(f'Search api {command.api_id}')
         api = self.repository.search(command.api_id)
         return SearchApiResponse(**api.get_object_dict())

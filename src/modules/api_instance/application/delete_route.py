@@ -3,6 +3,7 @@ from modules.api_instance.domain import Response
 from modules.api_instance.domain import Route
 from modules.shared.domain import ICommand
 from modules.shared.domain import IUseCase
+from modules.shared.infrastructure import logger
 
 
 class DeleteRouteCommand(ICommand):
@@ -19,6 +20,7 @@ class DeleteRoute(IUseCase):
         self.repository = repository
 
     def execute(self, command: DeleteRouteCommand):
+        logger.info(f'The route {command.method} {command.path} will be removed from api {command.api_id}')
         route = Route(command.path, command.method, Response('{}'))
         api = self.repository.search(command.api_id)
         api.remove_route(route)

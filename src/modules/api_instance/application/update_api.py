@@ -2,6 +2,7 @@ from modules.api_instance.domain import IRepository
 from modules.api_instance.domain import Port
 from modules.shared.domain import ICommand
 from modules.shared.domain import IUseCase
+from modules.shared.infrastructure import logger
 
 
 class UpdateApiCommand(ICommand):
@@ -17,6 +18,7 @@ class UpdateApi(IUseCase):
         self.repository = repository
 
     def execute(self, command: UpdateApiCommand):
+        logger.info(f'The api {command.api_id} will be updated')
         port = Port(command.port)
         api = self.repository.search(command.api_id)
         api.port = port
