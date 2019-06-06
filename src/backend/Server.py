@@ -2,6 +2,8 @@ import os
 
 from flask import Flask
 
+from backend.apis import api_v1
+
 
 class Server:
 
@@ -9,6 +11,7 @@ class Server:
         self.flask_server = Flask('Server')
         self.apis = [
             # TODO: Add new api versions
+            api_v1
         ]
 
         self.register_apis()
