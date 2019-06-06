@@ -7,7 +7,7 @@ from modules.api_instance.domain import IRepository
 from modules.shared.domain.errors import DomainDontFoundError
 
 
-class TestRepository(IRepository):
+class FakeRepository(IRepository):
 
     def __init__(self) -> None:
         self.apis: List[ApiInstance] = []
