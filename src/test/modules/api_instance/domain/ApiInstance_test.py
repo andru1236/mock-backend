@@ -62,7 +62,6 @@ def test_remove_route_from_api_success(get_port, get_users_routes_crud):
 @pytest.mark.usefixtures('get_port', 'get_users_routes_crud')
 def test_remove_route_that_not_exist_in_api(get_port, get_users_routes_crud):
     api = ApiInstance(get_port, get_users_routes_crud)
-    count_routes = len(api.routes)
     this_route_not_exist = Route('test', 'delete', Response('{"status": 200}'))
     with pytest.raises(DomainBadRequestError):
         api.remove_route(this_route_not_exist)
