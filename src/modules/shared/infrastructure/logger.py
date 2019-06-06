@@ -6,7 +6,7 @@ from logzero import logger
 
 print('URL data base: ', os.environ.get('MONGO_CONNECTION'))
 print('Data base name: ', os.environ.get('DB_NAME_MONGO'))
-print('Environment', os.environ.get('ENV'))
+print('Environment', os.environ.get('ENVIRONMENT'))
 
 if os.environ.get('ENV') == 'DEV':
     logzero.loglevel(logging.DEBUG)
