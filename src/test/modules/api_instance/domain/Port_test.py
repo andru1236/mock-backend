@@ -27,5 +27,5 @@ def test_create_port_that_not_exist_fail():
 
 
 def test_create_port_with_bad_arguments_fail():
-    with pytest.raises(TypeError):
+    with pytest.raises(DomainBadRequestError):
         Port('5000')
