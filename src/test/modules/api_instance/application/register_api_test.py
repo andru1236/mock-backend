@@ -37,3 +37,22 @@ def test_register_many_apis_success():
         use_case.execute(command)
         inserted_apis += 1
         assert len(repository.apis) == inserted_apis
+
+
+def test_register_many_apis_with_same_port():
+    repository = FakeRepository()
+    use_case = RegisterApi(repository)
+
+    not_exist_data = 0
+    assert len(repository.apis) == not_exist_data
+    same_ports = [8000, 8000, 8000, 8000, 8000]
+
+    commands_will_be_execute = []
+    for port in same_ports:
+        commands_will_be_execute.append(RegisterApiCommand(port))
+
+    inserted_apis = 0
+    for command in commands_will_be_execute:
+        use_case.execute(command)
+        inserted_apis += 1
+        assert len(repository.apis) == inserted_apis
