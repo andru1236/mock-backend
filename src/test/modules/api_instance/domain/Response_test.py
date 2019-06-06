@@ -26,3 +26,9 @@ def test_create_response_with_bad_format_json():
     with pytest.raises(DomainBadRequestError):
         response_string_json = "{test}"
         Response(response_string_json)
+
+
+def test_create_response_with_response_blank():
+    response_value = '{}'
+    response = Response(response_value)
+    assert response.value == response_value
