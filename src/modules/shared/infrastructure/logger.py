@@ -8,11 +8,11 @@ print('URL data base: ', os.environ.get('MONGO_CONNECTION'))
 print('Data base name: ', os.environ.get('DB_NAME_MONGO'))
 print('Environment', os.environ.get('ENVIRONMENT'))
 
-if os.environ.get('ENV') == 'DEV':
+if os.environ.get('ENVIRONMENT') == 'DEV':
     logzero.loglevel(logging.DEBUG)
 
-elif os.environ.get('ENV') == 'PROD':
+elif os.environ.get('ENVIRONMENT') == 'PROD':
     logzero.loglevel(logging.INFO)
-    logzero.logfile("./erp.log")
+    logzero.logfile("./api.log")
 
 logger = logger

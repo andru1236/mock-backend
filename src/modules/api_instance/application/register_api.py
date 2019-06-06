@@ -3,6 +3,7 @@ from modules.api_instance.domain import IRepository
 from modules.api_instance.domain import Port
 from modules.shared.domain import ICommand
 from modules.shared.domain import IUseCase
+from modules.shared.infrastructure import logger
 
 
 class RegisterApiCommand(ICommand):
@@ -16,6 +17,7 @@ class RegisterApi(IUseCase):
         self.repository = repository
 
     def execute(self, command: RegisterApiCommand):
+        logger.info(f'Execute Create new api instance with port {command.port}')
         port = Port(command.port)
         api = ApiInstance(port)
         self.repository.save(api)
