@@ -1,5 +1,3 @@
-import os
-
 from flask import Flask
 
 from backend.apis import api_v1
@@ -21,9 +19,4 @@ class Server:
             self.flask_server.register_blueprint(api)
 
     def run(self):
-        environment = os.environ.get('ENV')
-        if environment == 'DEV':
-            self.flask_server.run(debug=True, host='0.0.0.0')
-        elif enumerate == 'PROD':
-            # TODO: Implement rules for run in production
-            self.flask_server.run()
+        self.flask_server.run(debug=True, host='0.0.0.0')
