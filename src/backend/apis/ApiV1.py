@@ -11,7 +11,7 @@ class ApiV1:
         self.api = Api(self.app)
 
         self.controllers = [
-            # TODO: Add controlers to app
+            # TODO: Add controllers to app
             api_instance_controller
         ]
 
