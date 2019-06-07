@@ -2,6 +2,7 @@ from flask import request
 from flask_restplus import Namespace, Resource
 
 from modules.api_instance import AddRouteCommand
+from modules.api_instance import DeleteApiCommand
 from modules.api_instance import LaunchApiInstanceCommand
 from modules.api_instance import RegisterApiCommand
 from modules.api_instance import SearchApiQuery
@@ -28,6 +29,10 @@ class ApiSearcherController(Resource):
         body = request.get_json()
         command_bus.execute(UpdateApiCommand(api_id, body['port']))
         return 'sucess', 200
+
+    def delete(self, api_id):
+        command_bus.execute(DeleteApiCommand(api_id))
+        return 'success', 200
 
 
 @controller.route('/<api_id>/routers')
