@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"port\": 6000\n}"
+					"raw": "{\n\t\"name\": \"api test\",\n\t\"port\": 3000\n}"
 				},
 				"url": {
 					"raw": "{{API_HOST}}/apis",
@@ -47,7 +47,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"port\": 6000\n}"
+					"raw": "{\n\t\"name\":\"update_name\",\n\t\"port\": 6000\n}"
 				},
 				"url": {
 					"raw": "{{API_HOST}}/apis/{id}",
