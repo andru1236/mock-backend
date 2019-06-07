@@ -5,35 +5,9 @@ from flask import Flask
 from flask_restplus import Api
 from flask_restplus import Resource
 
+from modules.api_instance.domain.builder_server import MethodWithResponse
+from modules.api_instance.domain.builder_server import RouteUnifyByPath
 from modules.shared.infrastructure.utils import SingletonDecorator
-
-
-class MethodWithResponse:
-
-    def __init__(self, method: str, response: str) -> None:
-        self.method = method
-        self.response = response
-
-
-class RouteUnifyByPath:
-
-    def __init__(self, path: str, resource: MethodWithResponse) -> None:
-        self.path = path
-        self.resources = []
-        self.resources.append(resource)
-
-    def add_resouce(self, new_resource: MethodWithResponse):
-        for resource in self.resources:
-            if resource.method == new_resource.method:
-                raise Exception('This method is already registered')
-            self.resources.append(new_resource)
-
-
-class ServerRunneable:
-
-    def __init__(self, _id: str, thread) -> None:
-        self._id = _id
-        self.thread = thread
 
 
 @SingletonDecorator
@@ -68,6 +42,7 @@ class BuilderServer:
         def factory_closure(response):
             def closure(self):
                 return response, 200
+
             return closure
 
         for route in routes:
@@ -97,5 +72,3 @@ class BuilderServer:
                             RouteUnifyByPath(route.path, MethodWithResponse(route.method, route.response))
                         )
         return routes_by_path
-
-

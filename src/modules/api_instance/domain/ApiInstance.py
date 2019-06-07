@@ -1,6 +1,6 @@
 from typing import List
 
-from modules.api_instance.domain.BuilderServer import BuilderServer
+from modules.api_instance.domain.builder_server.BuilderServer import BuilderServer
 from modules.api_instance.domain import Port
 from modules.api_instance.domain import Route
 from modules.api_instance.domain import Settings
