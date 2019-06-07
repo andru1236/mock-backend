@@ -3,11 +3,13 @@ from flask_restplus import Namespace, Resource
 
 from modules.api_instance import AddRouteCommand
 from modules.api_instance import DeleteApiCommand
+from modules.api_instance import DeleteRouteCommand
 from modules.api_instance import LaunchApiInstanceCommand
 from modules.api_instance import RegisterApiCommand
 from modules.api_instance import SearchApiQuery
 from modules.api_instance import StopApiInstanceCommand
 from modules.api_instance import UpdateApiCommand
+from modules.api_instance import UpdateRouteCommand
 from modules.api_instance import command_bus
 from modules.api_instance import query_bus
 
@@ -39,7 +41,17 @@ class ApiSearcherController(Resource):
 class RouteController(Resource):
     def post(self, api_id):
         data = request.get_json()
-        return command_bus.execute(AddRouteCommand(api_id, data['path'], data['method'], data['response'])), 200
+        return command_bus.execute(AddRouteCommand(api_id, data['path'], data['method'], data['response'])), 201
+
+    def put(self, api_id):
+        data = request.get_json()
+        command_bus.execute(UpdateRouteCommand(api_id, data['path'], data['method'], data['response']))
+        return 'success', 200
+
+    def delete(self, api_id):
+        data = request.get_json()
+        command_bus.execute(DeleteRouteCommand(api_id, data['path'], data['method']))
+        return 'sucess', 200
 
 
 @controller.route('/<api_id>/start')
