@@ -31,9 +31,14 @@ class BuilderServer:
             print("logger error")
 
     def stop_api(self, api_id):
-        for api in self.flask_runnables:
+        position_process_for_remove = -1
+        for index, api in enumerate(self.flask_runnables):
             if api._id == api_id:
+                position_process_for_remove = index
                 api.stop_server()
+                del api
+                break
+        del self.flask_runnables[position_process_for_remove]
 
     def build_flask_server(self, api):
         flask_tenant = Flask(api._id)
