@@ -11,7 +11,7 @@ from modules.api_instance import UpdateApiCommand
 from modules.api_instance import command_bus
 from modules.api_instance import query_bus
 
-controller = Namespace('api', description='End points for created a api instance')
+controller = Namespace('apis', description='End points for created a api instance')
 
 
 @controller.route('')
