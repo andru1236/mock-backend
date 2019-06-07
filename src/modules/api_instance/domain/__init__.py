@@ -15,7 +15,3 @@ from .IRepository import IRepository
 
 # Services
 
-# Utils
-from .BuilderServer import BuilderServer
-
-build_server = BuilderServer()

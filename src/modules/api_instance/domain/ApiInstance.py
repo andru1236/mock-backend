@@ -1,5 +1,6 @@
 from typing import List
 
+from modules.api_instance.domain.BuilderServer import BuilderServer
 from modules.api_instance.domain import Port
 from modules.api_instance.domain import Route
 from modules.api_instance.domain import Settings
@@ -36,7 +37,8 @@ class ApiInstance(IAggregate):
         self.routes = self.__get_list_without_route(route)
 
     def run_api(self):
-        pass
+        builder_server = BuilderServer()
+        builder_server.run_api(self)
 
     def get_object_dict(self):
         object_dict = {

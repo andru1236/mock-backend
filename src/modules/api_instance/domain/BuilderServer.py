@@ -1,10 +1,10 @@
 import ast
+import threading
 
 from flask import Flask
 from flask_restplus import Api
 from flask_restplus import Resource
 
-from modules.api_instance.domain import ApiInstance
 from modules.shared.infrastructure.utils import SingletonDecorator
 
 
@@ -29,24 +29,53 @@ class RouteUnifyByPath:
             self.resources.append(new_resource)
 
 
+class ServerRunneable:
+
+    def __init__(self, _id: str, thread) -> None:
+        self._id = _id
+        self.thread = thread
+
+
 @SingletonDecorator
 class BuilderServer:
 
     def __init__(self) -> None:
         self.threads = []
 
-    def run_api(self, api: ApiInstance):
+    def run_api(self, api):
+        flask_server = self.build_flask_server(api)
+
+        def executor():
+            flask_server.app.run('0.0.0.0', api.port.value)
+
+        thread_flask = threading.Thread(target=executor)
+        # self.threads.append(ServerRunneable(api._id, thread_flask))
+        thread_flask.start()
+
+    def stop_api(self, api_id):
+        for api in self.threads:
+            if api._id == api_id:
+                api.thread.stop()
+
+    def build_flask_server(self, api):
         flask_tenant = Flask(api._id)
         api_tenant = Api(flask_tenant)
         routes = self.sordted_routes_by_path(api.routes)
+
+        def factory_closure(response):
+            def closure(self):
+                return ast.literal_eval(response), 200
+            return closure
+
         for route in routes:
             # Create dynamic class
             # flask rest-plus run with inheritance class
             mock_class = type(route.path, (Resource, object), Resource.__dict__.copy())
             for resource in route.resources:
-                setattr(mock_class, resource.method.lower(), self.factory_closure(resource.response))
+                setattr(mock_class, resource.method.lower(), factory_closure(resource.response))
             api_tenant.add_resource(mock_class, route.path)
-        api_tenant.app.run('0.0.0.0', api.port.value)
+        return api_tenant
+        # api_tenant.app.run('0.0.0.0', api.port.value)
 
     def sordted_routes_by_path(self, routes):
         routes_by_path = []
@@ -66,8 +95,4 @@ class BuilderServer:
                         )
         return routes_by_path
 
-    def factory_closure(self, response):
-        def closure(self):
-            return ast.literal_eval(response), 200
 
-        return closure
