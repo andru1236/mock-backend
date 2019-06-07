@@ -1,0 +1,277 @@
+{
+	"info": {
+		"_postman_id": "17716926-d0d0-4f6d-ab1e-ca563e13ab66",
+		"name": "api-mock",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create api ",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"port\": 6000\n}"
+				},
+				"url": {
+					"raw": "{{API_HOST}}/apis",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"apis"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update api",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"port\": 6000\n}"
+				},
+				"url": {
+					"raw": "{{API_HOST}}/apis/{id}",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"apis",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get a api instance",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{API_HOST}}/apis/{id}",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"apis",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "detele an api instance",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{API_HOST}}/apis/{id}",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"apis",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add route to api",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"path\": \"/users\",\n\t\"method\": \"get\",\n\t\"response\": {\n\t\t\"test\": \"test\"\n\t}\n\t\n}"
+				},
+				"url": {
+					"raw": "{{API_HOST}}/apis/{id}/routes",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"apis",
+						"{id}",
+						"routes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update route from api",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"path\": \"/users\",\n\t\"method\": \"get\",\n\t\"response\": {\n\t\t\"update_test\": \"update_test\"\n\t}\n\t\n}"
+				},
+				"url": {
+					"raw": "{{API_HOST}}/apis/{id}/routes",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"apis",
+						"{id}",
+						"routes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete route from api",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"path\": \"/users\",\n\t\"method\": \"get\"\n}"
+				},
+				"url": {
+					"raw": "{{API_HOST}}/apis/{id}/routes",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"apis",
+						"{id}",
+						"routes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "start api instance",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{API_HOST}}/apis/{id}/start",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"apis",
+						"{id}",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "stop api instance",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{API_HOST}}/apis/{id}/stop",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"apis",
+						"{id}",
+						"stop"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
