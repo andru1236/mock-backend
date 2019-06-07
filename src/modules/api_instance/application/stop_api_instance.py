@@ -4,6 +4,7 @@ from modules.api_instance.domain.builder_server.errors import ServerNeverWasStar
 from modules.shared.domain import ICommand
 from modules.shared.domain import IResponse
 from modules.shared.domain import IUseCase
+from modules.shared.infrastructure import logger
 
 
 class StopApiInstanceCommand(ICommand):
@@ -19,6 +20,7 @@ class StopApiInstance(IUseCase):
 
     def execute(self, command: StopApiInstanceCommand) -> None or IResponse:
         api = self.repository.search(command.api_id)
+        logger.info(f'The api {api._id} in port {api.port} will be stopped')
         if api.settings.enabled is False:
             raise ServerNeverWasStarting(f'The never was starting')
         api.settings.enabled = False
