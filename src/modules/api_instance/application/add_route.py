@@ -8,7 +8,7 @@ from modules.shared.infrastructure import logger
 
 
 class AddRouteCommand(ICommand):
-    def __init__(self, api_id: str, path: str, method: str, response: str) -> None:
+    def __init__(self, api_id: str, path: str, method: str, response) -> None:
         self.api_id = api_id
         self.path = path
         self.method = method
@@ -22,6 +22,7 @@ class AddRoute(IUseCase):
 
     def execute(self, command: AddRouteCommand):
         logger.info(f'Execute add route to api {command.api_id}')
+        print(command.response)
         route = Route(command.path, command.method, Response(command.response))
         api = self.repository.search(command.api_id)
         api.add_route(route)

@@ -19,4 +19,4 @@ class Server:
             self.flask_server.register_blueprint(api)
 
     def run(self):
-        self.flask_server.run(debug=True, host='0.0.0.0')
+        self.flask_server.run('0.0.0.0')

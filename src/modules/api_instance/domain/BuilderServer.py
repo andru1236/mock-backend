@@ -50,7 +50,10 @@ class BuilderServer:
 
         thread_flask = threading.Thread(target=executor)
         # self.threads.append(ServerRunneable(api._id, thread_flask))
-        thread_flask.start()
+        try:
+            thread_flask.start()
+        except Exception:
+            print("ALGO")
 
     def stop_api(self, api_id):
         for api in self.threads:
@@ -64,7 +67,7 @@ class BuilderServer:
 
         def factory_closure(response):
             def closure(self):
-                return ast.literal_eval(response), 200
+                return response, 200
             return closure
 
         for route in routes:
