@@ -18,4 +18,4 @@ from .IRepository import IRepository
 # Utils
 from .BuilderServer import BuilderServer
 
-build = BuilderServer()
+build_server = BuilderServer()
