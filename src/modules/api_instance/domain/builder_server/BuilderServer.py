@@ -37,17 +37,18 @@ class BuilderServer:
     def build_flask_server(self, api):
         flask_tenant = Flask(api._id)
         api_tenant = Api(flask_tenant)
-        routes = self.sordted_routes_by_path(api.routes)
+        routes = self.sorted_routes_by_path(api.routes)
 
         def factory_closure(response):
             def closure(self):
+                # Flask transform dict to json
                 return response, 200
 
             return closure
 
         for route in routes:
             # Create dynamic class
-            # flask rest-plus run with inheritance class
+            # flask rest-plus need classes for create routes that's run with inheritance class
             mock_class = type(route.path, (Resource, object), Resource.__dict__.copy())
             for resource in route.resources:
                 setattr(mock_class, resource.method.lower(), factory_closure(resource.response))
@@ -55,7 +56,7 @@ class BuilderServer:
         return api_tenant
         # api_tenant.app.run('0.0.0.0', api.port.value)
 
-    def sordted_routes_by_path(self, routes):
+    def sorted_routes_by_path(self, routes):
         routes_by_path = []
         for route in routes:
             if len(routes_by_path) == 0:
