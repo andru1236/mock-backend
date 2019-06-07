@@ -21,7 +21,7 @@ class StopApiInstance(IUseCase):
         api = self.repository.search(command.api_id)
         if api.settings.enabled is False:
             raise ServerNeverWasStarting(f'The never was starting')
-        api.settings.enabled = True
+        api.settings.enabled = False
         self.repository.save(api)
         builder_server = BuilderServer()
         builder_server.stop_api(command.api_id)
