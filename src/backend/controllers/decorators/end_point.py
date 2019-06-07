@@ -1,7 +1,7 @@
 from functools import wraps
 
 from backend.utils import ServerResponse
-# from backend.utils.error_handler import error_handler
+from backend.utils import ErrorHandler
 from modules.shared.domain.errors import DomainBaseError
 from modules.shared.infrastructure import logger
 
@@ -15,8 +15,7 @@ def end_point(f):
 
         except DomainBaseError as error:
             logger.error(error.__dict__)
-            # TODO: Implement handler error
-            # error_handler(error)
+            ErrorHandler.catch(error)
 
         except Exception as error:
             logger.critical(error)
