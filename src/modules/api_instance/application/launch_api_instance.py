@@ -4,6 +4,7 @@ from modules.api_instance.domain.builder_server.errors import ServerIsRunning
 from modules.shared.domain import ICommand
 from modules.shared.domain import IResponse
 from modules.shared.domain import IUseCase
+from modules.shared.domain.errors import DomainBadRequestError
 
 
 class LaunchApiInstanceCommand(ICommand):
@@ -20,6 +21,8 @@ class LaunchApiInstance(IUseCase):
         api = self.repository.search(command.api_id)
         if api.settings.enabled is True:
             raise ServerIsRunning(f'The server is running in port {api.port.value}')
+        if len(api.routes) == 0:
+            raise DomainBadRequestError(f'this API :{api._id} does not have routes')
         api.settings.enabled = True
         self.repository.save(api)
 
