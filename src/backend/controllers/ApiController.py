@@ -35,7 +35,7 @@ class ApiSearcherController(Resource):
     @end_point
     def put(self, api_id):
         body = request.get_json()
-        return command_bus.execute(UpdateApiCommand(api_id, body['port'])), 200
+        return command_bus.execute(UpdateApiCommand(api_id, body['name'], body['port'])), 200
 
     @end_point
     def delete(self, api_id):
