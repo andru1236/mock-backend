@@ -1,6 +1,5 @@
 from typing import List
 
-from modules.api_instance.domain.builder_server import BuilderServer
 from modules.api_instance.domain.api import Port
 from modules.api_instance.domain.api import Route
 from modules.api_instance.domain.api import Settings
@@ -35,10 +34,6 @@ class ApiInstance(IAggregate):
             raise DomainBadRequestError(f'This route [{route.method}] {route.path} not exist')
 
         self.routes = self.__get_list_without_route(route)
-
-    def run_api(self):
-        builder_server = BuilderServer()
-        builder_server.run_api(self)
 
     def get_object_dict(self):
         object_dict = {

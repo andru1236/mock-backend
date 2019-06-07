@@ -1,5 +1,4 @@
-import ast
-import threading
+import multiprocessing
 
 from flask import Flask
 from flask_restplus import Api
@@ -7,6 +6,7 @@ from flask_restplus import Resource
 
 from modules.api_instance.domain.builder_server import MethodWithResponse
 from modules.api_instance.domain.builder_server import RouteUnifyByPath
+from modules.api_instance.domain.builder_server import ServerRunnable
 from modules.shared.infrastructure.utils import SingletonDecorator
 
 
@@ -14,7 +14,7 @@ from modules.shared.infrastructure.utils import SingletonDecorator
 class BuilderServer:
 
     def __init__(self) -> None:
-        self.threads = []
+        self.flask_runnables = []
 
     def run_api(self, api):
         flask_server = self.build_flask_server(api)
@@ -22,17 +22,18 @@ class BuilderServer:
         def executor():
             flask_server.app.run('0.0.0.0', api.port.value)
 
-        thread_flask = threading.Thread(target=executor)
-        # self.threads.append(ServerRunneable(api._id, thread_flask))
+        flask_process = multiprocessing.Process(target=executor)
+
+        self.flask_runnables.append(ServerRunnable(api._id, flask_process))
         try:
-            thread_flask.start()
+            flask_process.start()
         except Exception:
-            print("ALGO")
+            print("logger error")
 
     def stop_api(self, api_id):
-        for api in self.threads:
+        for api in self.flask_runnables:
             if api._id == api_id:
-                api.thread.stop()
+                api.stop_server()
 
     def build_flask_server(self, api):
         flask_tenant = Flask(api._id)
