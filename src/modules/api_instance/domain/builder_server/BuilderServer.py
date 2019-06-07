@@ -63,6 +63,7 @@ class BuilderServer:
             mock_class = type(route.path, (Resource, object), Resource.__dict__.copy())
             for resource in route.resources:
                 setattr(mock_class, resource.method.lower(), factory_closure(resource.response))
+                print(resource.response, type(resource.response))
             api_tenant.add_resource(mock_class, route.path)
         return api_tenant
 
@@ -71,17 +72,19 @@ class BuilderServer:
         routes_by_path = []
         for route in routes:
             if len(routes_by_path) == 0:
-                routes_by_path.append(RouteUnifyByPath(route.path, MethodWithResponse(route.method, route.response)))
+                routes_by_path.append(
+                    RouteUnifyByPath(route.path, MethodWithResponse(route.method, route.response.value))
+                )
             else:
                 for index, route_by_path in enumerate(routes_by_path):
                     if route.path == route_by_path.path:
                         try:
-                            route_by_path.add_resouce(MethodWithResponse(route.method, route.response))
+                            route_by_path.add_resouce(MethodWithResponse(route.method, route.response.value))
                         except Exception as error:
                             pass
                     elif len(routes_by_path) - 1 == index:
                         routes_by_path.append(
-                            RouteUnifyByPath(route.path, MethodWithResponse(route.method, route.response))
+                            RouteUnifyByPath(route.path, MethodWithResponse(route.method, route.response.value))
                         )
         return routes_by_path
 
