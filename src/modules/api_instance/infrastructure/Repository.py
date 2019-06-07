@@ -10,6 +10,7 @@ from modules.shared.domain.errors import DomainBadRequestError
 from modules.shared.domain.errors import DomainDontFoundError
 
 from modules.shared.infrastructure import MongoConnection
+from modules.shared.infrastructure import logger
 
 
 class Repository(IRepository):
@@ -25,8 +26,10 @@ class Repository(IRepository):
         del api_instance_dict['_id']
 
         if api_instance._id is "":
+            logger.info(f'A new API will be create in port {api_instance.port.value}')
             self.__db.insert(api_instance_dict)
         else:
+            logger.info(f'The Api: {api_instance._id} will be updated')
             self.__db.update_one({'_id': ObjectId(api_instance._id)}, {
                 '$set': api_instance_dict
             })
@@ -52,6 +55,7 @@ class Repository(IRepository):
         )
 
     def delete(self, api_id: str) -> None:
+        logger.info(f'The Api: {api_id} will be deleted')
         delete_count = self.__db.delete_one({'_id': ObjectId(api_id)}).deleted_count
         if delete_count == 0:
             raise DomainBadRequestError(f'This api {api_id} not exist')
