@@ -43,3 +43,11 @@ def test_create_route_with_inteker_like_path(get_response):
     response = get_response
     with pytest.raises(DomainBadRequestError):
         Route(path, method, response)
+
+
+def test_create_route_with_other_response_types():
+    path = 10505050
+    method = 'get'
+    response = '{"response": "response"}'
+    with pytest.raises(DomainBadRequestError):
+        Route(path, method, response)
