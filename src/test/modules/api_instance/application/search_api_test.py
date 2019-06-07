@@ -16,4 +16,4 @@ def test_search_api():
     search_api = SearchApi(repository)
     response_query = search_api.execute(SearchApiQuery(api._id))
 
-    assert response_query._id == api._id
+    assert response_query['_id'] == api._id

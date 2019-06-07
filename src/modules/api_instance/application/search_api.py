@@ -27,4 +27,4 @@ class SearchApi(IUseCase):
     def execute(self, command: SearchApiQuery):
         logger.info(f'Search api {command.api_id}')
         api = self.repository.search(command.api_id)
-        return SearchApiResponse(**api.get_object_dict())
+        return SearchApiResponse(**api.get_object_dict()).__dict__
