@@ -14,3 +14,8 @@ from .ApiInstance import ApiInstance
 from .IRepository import IRepository
 
 # Services
+
+# Utils
+from .BuilderServer import BuilderServer
+
+build = BuilderServer()

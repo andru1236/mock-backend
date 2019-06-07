@@ -1,3 +1,5 @@
+import ast
+
 from flask import Flask
 from flask_restplus import Api
 from flask_restplus import Resource
@@ -44,6 +46,7 @@ class BuilderServer:
         routes = self.sordted_routes_by_path(api.routes)
         for route in routes:
             # Create dynamic class
+            # flask rest-plus run with inheritance class
             mock_class = type(route.path, (Resource, object), Resource.__dict__.copy())
             for resource in route.resources:
                 setattr(mock_class, resource.method.lower(), self.factory_closure(resource.response))
@@ -70,6 +73,6 @@ class BuilderServer:
 
     def factory_closure(self, response):
         def closure(self):
-            return response, 200
+            return ast.literal_eval(response), 200
 
         return closure

@@ -35,6 +35,9 @@ class ApiInstance(IAggregate):
 
         self.routes = self.__get_list_without_route(route)
 
+    def run_api(self):
+        pass
+
     def get_object_dict(self):
         object_dict = {
             '_id': self._id,
