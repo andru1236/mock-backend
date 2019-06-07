@@ -6,6 +6,7 @@ from modules.api_instance import LaunchApiInstanceCommand
 from modules.api_instance import RegisterApiCommand
 from modules.api_instance import SearchApiQuery
 from modules.api_instance import StopApiInstanceCommand
+from modules.api_instance import UpdateApiCommand
 from modules.api_instance import command_bus
 from modules.api_instance import query_bus
 
@@ -22,6 +23,11 @@ class ApiController(Resource):
 class ApiSearcherController(Resource):
     def get(self, api_id):
         return query_bus.execute(SearchApiQuery(api_id)), 200
+
+    def put(self, api_id):
+        body = request.get_json()
+        command_bus.execute(UpdateApiCommand(api_id, body['port']))
+        return 'sucess', 200
 
 
 @controller.route('/<api_id>/routers')
