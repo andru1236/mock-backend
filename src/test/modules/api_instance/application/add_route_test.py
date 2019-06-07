@@ -16,7 +16,7 @@ def test_add_new_route_to_api_success():
     assert len(repository.apis[0].routes) == without_routes
 
     use_case = AddRoute(repository)
-    use_case.execute(AddRouteCommand(api_id, 'users', 'get', '{"test": "test"}'))
+    use_case.execute(AddRouteCommand(api_id, 'users', 'get', {"test": "test"}))
     insert_one_route = 1
 
     assert len(repository.apis[0].routes) == insert_one_route

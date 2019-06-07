@@ -15,7 +15,7 @@ def test_delete_route_from_api():
     api = repository.apis[0]
 
     add_route = AddRoute(repository)
-    add_route.execute(AddRouteCommand(api._id, 'users', 'get', '{"test": "test"}'))
+    add_route.execute(AddRouteCommand(api._id, 'users', 'get', {"test": "test"}))
 
     insert_one_route_to_api = 1
     assert len(api.routes) == insert_one_route_to_api

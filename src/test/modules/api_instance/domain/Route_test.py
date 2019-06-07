@@ -9,7 +9,7 @@ from modules.shared.domain.errors import DomainBadRequestError
 def get_users_routes_crud():
     path = 'users'
     methods = ['get', 'post', 'put', 'delete']
-    generic_response = Response('{"json_test": "value_json"}')
+    generic_response = Response({"json_test": "value_json"})
     routes = [Route(path, method, generic_response) for method in methods]
     return routes
 

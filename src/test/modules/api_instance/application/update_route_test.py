@@ -19,12 +19,12 @@ def test_update_route():
     api = repository.apis[0]
     api_id = repository.apis[0]._id
 
-    response_test = '{"test": "test"}'
+    response_test = {"test": "test"}
     add_route.execute(AddRouteCommand(api_id, 'users', 'get', response_test))
 
     assert api.routes[0].response.value == response_test
 
-    updated_response = '{"update": "update"}'
+    updated_response = {"update": "update"}
 
     use_case.execute(UpdateRouteCommand(api_id, 'users', 'get', updated_response))
 
