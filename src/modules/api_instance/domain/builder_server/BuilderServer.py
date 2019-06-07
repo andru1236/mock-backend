@@ -55,8 +55,8 @@ class BuilderServer:
                 setattr(mock_class, resource.method.lower(), factory_closure(resource.response))
             api_tenant.add_resource(mock_class, route.path)
         return api_tenant
-        # api_tenant.app.run('0.0.0.0', api.port.value)
 
+    # TODO: change logic of routes, this work but change the logic business
     def sorted_routes_by_path(self, routes):
         routes_by_path = []
         for route in routes:
