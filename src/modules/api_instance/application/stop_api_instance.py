@@ -6,18 +6,18 @@ from modules.shared.domain import IResponse
 from modules.shared.domain import IUseCase
 
 
-class StopInstanceCommand(ICommand):
+class StopApiInstanceCommand(ICommand):
 
     def __init__(self, api_id: str) -> None:
         self.api_id = api_id
 
 
-class StopInstance(IUseCase):
+class StopApiInstance(IUseCase):
 
     def __init__(self, repository: IRepository) -> None:
         self.repository = repository
 
-    def execute(self, command: StopInstanceCommand) -> None or IResponse:
+    def execute(self, command: StopApiInstanceCommand) -> None or IResponse:
         api = self.repository.search(command.api_id)
         if api.settings.enabled is False:
             raise ServerNeverWasStarting(f'The never was starting')
