@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 
 from backend.apis import api_v1
@@ -19,4 +21,4 @@ class Server:
             self.flask_server.register_blueprint(api)
 
     def run(self):
-        self.flask_server.run('0.0.0.0')
+        self.flask_server.run('0.0.0.0', port=os.environ.get('PORT'))
