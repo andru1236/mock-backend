@@ -1,9 +1,9 @@
 from typing import List
 
-from modules.api_instance.domain.builder_server.BuilderServer import BuilderServer
-from modules.api_instance.domain import Port
-from modules.api_instance.domain import Route
-from modules.api_instance.domain import Settings
+from modules.api_instance.domain.builder_server import BuilderServer
+from modules.api_instance.domain.api import Port
+from modules.api_instance.domain.api import Route
+from modules.api_instance.domain.api import Settings
 from modules.shared.domain import IAggregate
 from modules.shared.domain.errors import DomainBadRequestError
 

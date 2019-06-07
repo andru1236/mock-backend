@@ -1,6 +1,6 @@
 from bson.objectid import ObjectId
 
-from modules.api_instance.domain import Response
+from modules.api_instance.domain.api import Response
 from modules.shared.domain import IEntity
 from modules.shared.domain.errors import DomainBadRequestError
 

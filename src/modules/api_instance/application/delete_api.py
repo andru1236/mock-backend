@@ -1,4 +1,4 @@
-from modules.api_instance.domain import IRepository
+from modules.api_instance.domain.api import IRepository
 from modules.shared.domain import ICommand
 from modules.shared.domain import IUseCase
 from modules.shared.infrastructure import logger

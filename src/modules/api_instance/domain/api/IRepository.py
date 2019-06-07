@@ -1,4 +1,4 @@
-from modules.api_instance.domain import ApiInstance
+from modules.api_instance.domain.api import ApiInstance
 
 
 class IRepository:

@@ -1,11 +1,11 @@
 from bson import ObjectId
 
-from modules.api_instance.domain import ApiInstance
-from modules.api_instance.domain import IRepository
-from modules.api_instance.domain import Port
-from modules.api_instance.domain import Response
-from modules.api_instance.domain import Route
-from modules.api_instance.domain import Settings
+from modules.api_instance.domain.api import ApiInstance
+from modules.api_instance.domain.api import IRepository
+from modules.api_instance.domain.api import Port
+from modules.api_instance.domain.api import Response
+from modules.api_instance.domain.api import Route
+from modules.api_instance.domain.api import Settings
 from modules.shared.domain.errors import DomainBadRequestError
 from modules.shared.domain.errors import DomainDontFoundError
 

@@ -2,8 +2,8 @@ from typing import List
 
 from bson import ObjectId
 
-from modules.api_instance.domain import ApiInstance
-from modules.api_instance.domain import IRepository
+from modules.api_instance.domain.api import ApiInstance
+from modules.api_instance.domain.api import IRepository
 from modules.shared.domain.errors import DomainDontFoundError
 
 

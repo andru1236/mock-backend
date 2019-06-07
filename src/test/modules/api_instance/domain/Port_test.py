@@ -1,5 +1,5 @@
 import pytest
-from modules.api_instance.domain import Port
+from modules.api_instance.domain.api import Port
 from modules.shared.domain.errors import DomainBadRequestError
 
 
