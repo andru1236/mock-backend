@@ -12,8 +12,9 @@ class SearchApiQuery(IQuery):
 
 class SearchApiResponse(IResponse):
 
-    def __init__(self, _id: str, port: int, routes, settings):
+    def __init__(self, _id: str, name: str, port: int, routes, settings):
         self._id = _id
+        self.name = name
         self.port = port
         self.routes = routes
         self.settings = settings

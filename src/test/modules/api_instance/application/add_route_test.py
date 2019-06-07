@@ -8,7 +8,7 @@ from modules.api_instance.infrastructure import FakeRepository
 def test_add_new_route_to_api_success():
     repository = FakeRepository()
     register_api = RegisterApi(repository)
-    register_api.execute(RegisterApiCommand(8000))
+    register_api.execute(RegisterApiCommand('test_name', 8000))
 
     api_id = repository.apis[0]._id
 

@@ -12,7 +12,8 @@ def test_register_api_success():
     assert len(repository.apis) == not_exist_data
 
     common_port = 8000
-    command = RegisterApiCommand(common_port)
+    name = 'test'
+    command = RegisterApiCommand(name, common_port)
     use_case.execute(command)
 
     one_element_in_repository = 1
@@ -26,11 +27,13 @@ def test_register_many_apis_success():
 
     not_exist_data = 0
     assert len(repository.apis) == not_exist_data
+
+    name = 'test'
     common_port = [8000, 5000, 8080, 3000, 3001, 3002, 3003, 4000]
 
     commands_will_be_execute = []
     for port in common_port:
-        commands_will_be_execute.append(RegisterApiCommand(port))
+        commands_will_be_execute.append(RegisterApiCommand(name, port))
 
     inserted_apis = 0
     for command in commands_will_be_execute:
@@ -45,11 +48,13 @@ def test_register_many_apis_with_same_port():
 
     not_exist_data = 0
     assert len(repository.apis) == not_exist_data
+
+    name = 'test'
     same_ports = [8000, 8000, 8000, 8000, 8000]
 
     commands_will_be_execute = []
     for port in same_ports:
-        commands_will_be_execute.append(RegisterApiCommand(port))
+        commands_will_be_execute.append(RegisterApiCommand(name, port))
 
     inserted_apis = 0
     for command in commands_will_be_execute:

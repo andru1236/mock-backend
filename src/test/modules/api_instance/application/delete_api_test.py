@@ -8,7 +8,7 @@ from modules.api_instance.infrastructure import FakeRepository
 def test_delete_api():
     repository = FakeRepository()
     register_api = RegisterApi(repository)
-    register_api.execute(RegisterApiCommand(8000))
+    register_api.execute(RegisterApiCommand('test', 8000))
 
     inserted_one_api_instance = 1
     assert len(repository.apis) == inserted_one_api_instance

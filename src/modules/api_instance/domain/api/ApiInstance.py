@@ -9,8 +9,9 @@ from modules.shared.domain.errors import DomainBadRequestError
 
 class ApiInstance(IAggregate):
 
-    def __init__(self, port: Port, routes=None, settings: Settings = Settings(), _id: str = '') -> None:
+    def __init__(self, name:str, port: Port, routes=None, settings: Settings = Settings(), _id: str = '') -> None:
         super().__init__(_id)
+        self.name = name
         self.port: Port = port
         self.routes: List[Route] = [] if routes is None else routes
         self.settings = settings
@@ -38,6 +39,7 @@ class ApiInstance(IAggregate):
     def get_object_dict(self):
         object_dict = {
             '_id': self._id,
+            'name': self.name,
             'port': self.port.value,
             'routes': [route.get_object_dict() for route in self.routes],
             'settings': self.settings.__dict__

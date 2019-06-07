@@ -7,7 +7,8 @@ from modules.shared.infrastructure import logger
 
 
 class RegisterApiCommand(ICommand):
-    def __init__(self, port: int) -> None:
+    def __init__(self, name: str, port: int) -> None:
+        self.name = name
         self.port = port
 
 
@@ -19,5 +20,5 @@ class RegisterApi(IUseCase):
     def execute(self, command: RegisterApiCommand):
         logger.info(f'Execute Create new api instance with port {command.port}')
         port = Port(command.port)
-        api = ApiInstance(port)
+        api = ApiInstance(command.name, port)
         self.repository.save(api)

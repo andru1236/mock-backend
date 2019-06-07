@@ -14,7 +14,7 @@ def test_update_route():
     add_route = AddRoute(repository)
     use_case = UpdateRoute(repository)
 
-    register_api.execute(RegisterApiCommand(8000))
+    register_api.execute(RegisterApiCommand('test', 8000))
 
     api = repository.apis[0]
     api_id = repository.apis[0]._id
