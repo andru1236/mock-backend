@@ -37,7 +37,7 @@ class ApiSearcherController(Resource):
         return 'success', 200
 
 
-@controller.route('/<api_id>/routers')
+@controller.route('/<api_id>/routes')
 class RouteController(Resource):
     def post(self, api_id):
         data = request.get_json()

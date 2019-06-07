@@ -24,4 +24,4 @@ class DeleteRoute(IUseCase):
         route = Route(command.path, command.method, Response({}))
         api = self.repository.search(command.api_id)
         api.remove_route(route)
-        self.repository.save(route)
+        self.repository.save(api)
