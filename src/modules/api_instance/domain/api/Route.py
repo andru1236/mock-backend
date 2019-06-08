@@ -23,8 +23,8 @@ class Route(IEntity):
         if not isinstance(path, str):
             raise DomainBadRequestError(f'This path {path} is not valid')
 
-        # if not isinstance(response, Response):
-        #     raise DomainBadRequestError(f'Response should be json object')
+        if not isinstance(response, Response):
+            raise DomainBadRequestError(f'Response should be json object')
 
         self.path = path
         self.method = method
