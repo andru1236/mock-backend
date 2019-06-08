@@ -42,3 +42,9 @@ class Path(IEntity):
             raise DomainBadRequestError(f'This method {new_resource.method} not exist in {self.path}')
 
         self.resources.append(new_resource)
+
+    def get_object_dict(self):
+        return {
+            'path': self.path,
+            'resources': [resource.__dict__ for resource in self.resources]
+        }

@@ -36,3 +36,8 @@ class Paths:
             if path.path == route.path:
                 return self.paths[index]
         return None
+
+    def get_object_dict(self):
+        return {
+            'paths': [path.get_object_dict() for path in self.paths]
+        }
