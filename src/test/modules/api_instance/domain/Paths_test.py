@@ -72,6 +72,4 @@ def test_get_object_dict_of_paths():
         'paths': [user_path.get_object_dict(), admin_path.get_object_dict()]
     }
 
-    print(expected_dict)
-    print(paths.get_object_dict())
     assert paths.get_object_dict() == expected_dict
