@@ -2,10 +2,12 @@
 from .Param import Param
 from .Port import Port
 from .Response import Response
-from .Route import Route
 from .Settings import Settings
+from .Resource import Resource
 
 # Entities
+from .Route import Route
+from .Path import Path
 
 # Aggregate
 from .ApiInstance import ApiInstance
@@ -14,4 +16,3 @@ from .ApiInstance import ApiInstance
 from .IRepository import IRepository
 
 # Services
-
