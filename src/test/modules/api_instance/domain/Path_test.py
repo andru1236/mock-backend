@@ -77,3 +77,36 @@ def test_inserting_routes_twice_in_same_path_fail():
     with pytest.raises(DomainBadRequestError):
         path.add_resource(resource_get)
 
+
+def test_get_dict_object_from_path():
+    path = Path(route_with_get.path)
+
+    path.add_resource(resource_get)
+    path.add_resource(resource_post)
+    path.add_resource(resource_put)
+
+    expected_dict = {
+        'path': '/users',
+        'resources': [
+            {
+                'method': 'GET',
+                'response': {
+                    'test': 'test'
+                }
+            },
+            {
+                'method': 'POST',
+                'response': {
+                    'test_post': 'test_post'
+                }
+            },
+            {
+                'method': 'PUT',
+                'response': {
+                    'test_put': 'test_put'
+                }
+            }
+        ]
+    }
+
+    assert expected_dict == path.get_object_dict()
