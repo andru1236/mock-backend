@@ -68,8 +68,6 @@ def test_get_object_dict_of_paths():
     paths.add_route(admin_route_put)
     paths.add_route(admin_route_delete)
 
-    expected_dict = {
-        'paths': [user_path.get_object_dict(), admin_path.get_object_dict()]
-    }
+    expected_dict = [user_path.get_object_dict(), admin_path.get_object_dict()]
 
     assert paths.get_object_dict() == expected_dict

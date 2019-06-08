@@ -38,6 +38,4 @@ class Paths:
         return None
 
     def get_object_dict(self):
-        return {
-            'paths': [path.get_object_dict() for path in self.paths]
-        }
+        return [path.get_object_dict() for path in self.paths]
