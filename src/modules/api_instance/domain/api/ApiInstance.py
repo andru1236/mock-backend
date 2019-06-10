@@ -27,7 +27,7 @@ class ApiInstance(IAggregate):
     def get_list_paths(self):
         return self.paths.paths
 
-    def get_route(self, route: Route):
+    def get_path(self, route: Route):
         return self.paths.get_path_with_this(route)
 
     def get_object_dict(self):
