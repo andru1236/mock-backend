@@ -45,6 +45,7 @@ class Path(IEntity):
 
     def get_object_dict(self):
         return {
+            '_id': self._id,
             'path': self.path,
             'resources': [resource.__dict__ for resource in self.resources]
         }

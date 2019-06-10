@@ -3,15 +3,13 @@ from bson import ObjectId
 from modules.api_instance.domain.api import ApiInstance
 from modules.api_instance.domain.api import IRepository
 from modules.api_instance.domain.api import Path
+from modules.api_instance.domain.api import Paths
 from modules.api_instance.domain.api import Port
 from modules.api_instance.domain.api import Resource
 from modules.api_instance.domain.api import Response
-from modules.api_instance.domain.api import Route
 from modules.api_instance.domain.api import Settings
-from modules.api_instance.domain.api import Paths
 from modules.shared.domain.errors import DomainBadRequestError
 from modules.shared.domain.errors import DomainDontFoundError
-
 from modules.shared.infrastructure import MongoConnection
 from modules.shared.infrastructure import logger
 
