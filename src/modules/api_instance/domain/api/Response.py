@@ -5,9 +5,15 @@ from modules.shared.domain.errors import DomainBadRequestError
 
 class Response:
     def __init__(self, response) -> None:
-        if not isinstance(response, dict):
+        # if not isinstance(response, dict):
+        #     raise DomainBadRequestError('The response is not a json')
+        # elif not isinstance(response, list):
+        #     raise DomainBadRequestError('The response is not a json')
+
+        if isinstance(response, dict) or isinstance(response, list):
+            self.value = response
+        else:
             raise DomainBadRequestError('The response is not a json')
-        self.value = response
         # try:
         #     loads(response)
         #     self.value = response
