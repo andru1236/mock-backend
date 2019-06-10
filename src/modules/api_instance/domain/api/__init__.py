@@ -8,6 +8,7 @@ from .Resource import Resource
 # Entities
 from .Route import Route
 from .Path import Path
+from .Paths import Paths
 
 # Aggregate
 from .ApiInstance import ApiInstance

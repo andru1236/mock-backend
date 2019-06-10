@@ -1,56 +1,41 @@
-from typing import List
-
+from modules.api_instance.domain.api import Paths
 from modules.api_instance.domain.api import Port
 from modules.api_instance.domain.api import Route
 from modules.api_instance.domain.api import Settings
 from modules.shared.domain import IAggregate
-from modules.shared.domain.errors import DomainBadRequestError
 
 
 class ApiInstance(IAggregate):
 
-    def __init__(self, name:str, port: Port, routes=None, settings: Settings = Settings(), _id: str = '') -> None:
+    def __init__(self, name: str, port: Port, paths: Paths = None, settings: Settings = Settings(),
+                 _id: str = '') -> None:
         super().__init__(_id)
         self.name = name
         self.port: Port = port
-        self.routes: List[Route] = [] if routes is None else routes
+        self.paths: Paths = paths
         self.settings = settings
 
     def add_route(self, new_route: Route):
-        if self.__this_route_is_registered_in_routes(new_route):
-            raise DomainBadRequestError(f'This route [{new_route.method}] {new_route.path} is busy')
-        self.routes.append(new_route)
+        self.paths.add_route(new_route)
 
     def replace_route(self, new_route):
-        if not self.__this_route_is_registered_in_routes(new_route):
-            raise DomainBadRequestError(f'This route [{new_route.method}] {new_route.path} not exist')
-
-        new_routes = self.__get_list_without_route(new_route)
-
-        new_routes.append(new_route)
-        self.routes = new_routes
+        self.paths.update_route(new_route)
 
     def remove_route(self, route):
-        if not self.__this_route_is_registered_in_routes(route):
-            raise DomainBadRequestError(f'This route [{route.method}] {route.path} not exist')
+        self.paths.remove_route(route)
 
-        self.routes = self.__get_list_without_route(route)
+    def get_list_paths(self):
+        return self.paths.paths
+
+    def get_route(self, route: Route):
+        return self.paths.get_path_with_this(route)
 
     def get_object_dict(self):
         object_dict = {
             '_id': self._id,
             'name': self.name,
-            'port': self.port.value,
-            'routes': [route.get_object_dict() for route in self.routes],
+            'paths': self.port.value,
+            'routes': self.paths.get_object_dict(),
             'settings': self.settings.__dict__
         }
         return object_dict
-
-    def __get_list_without_route(self, route: Route) -> List[Route]:
-        return list(filter(lambda x: not route.is_equals(x), self.routes))
-
-    def __this_route_is_registered_in_routes(self, new_route: Route) -> bool:
-        for route in self.routes:
-            if route.is_equals(new_route):
-                return True
-        return False

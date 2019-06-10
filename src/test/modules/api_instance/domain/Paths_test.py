@@ -2,7 +2,7 @@ from modules.api_instance.domain.api import Path
 from modules.api_instance.domain.api import Resource
 from modules.api_instance.domain.api import Response
 from modules.api_instance.domain.api import Route
-from modules.api_instance.domain.api.Paths import Paths
+from modules.api_instance.domain.api import Paths
 
 Response_get = Response({'test_get': 'test_get'})
 Response_post = Response({'test_post': 'test_post'})
