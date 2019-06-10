@@ -34,6 +34,37 @@
 			"response": []
 		},
 		{
+			"name": "get all apis",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{API_HOST}}/apis",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"apis"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "update api",
 			"request": {
 				"method": "PUT",
