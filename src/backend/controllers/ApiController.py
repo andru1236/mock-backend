@@ -4,6 +4,7 @@ from flask_restplus import Namespace, Resource
 from modules.api_instance import AddRouteCommand
 from modules.api_instance import DeleteApiCommand
 from modules.api_instance import DeleteRouteCommand
+from modules.api_instance import GetApisQuery
 from modules.api_instance import LaunchApiInstanceCommand
 from modules.api_instance import RegisterApiCommand
 from modules.api_instance import SearchApiQuery
@@ -23,6 +24,10 @@ class ApiController(Resource):
     @end_point
     def post(self):
         return command_bus.execute(RegisterApiCommand(**request.get_json())), 201
+
+    @end_point
+    def get(self):
+        return query_bus.execute(GetApisQuery()), 200
 
 
 @controller.route('/<api_id>')

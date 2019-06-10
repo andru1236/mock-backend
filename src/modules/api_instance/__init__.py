@@ -16,6 +16,8 @@ from modules.api_instance.application.update_api import UpdateApi
 from modules.api_instance.application.update_api import UpdateApiCommand
 from modules.api_instance.application.update_route import UpdateRoute
 from modules.api_instance.application.update_route import UpdateRouteCommand
+from modules.api_instance.domain.api.get_apis import GetApis
+from modules.api_instance.domain.api.get_apis import GetApisQuery
 from modules.api_instance.infrastructure import Repository
 from modules.shared.infrastructure import CommandBus
 from modules.shared.infrastructure import QueryBus
@@ -37,3 +39,4 @@ command_bus.register(LaunchApiInstanceCommand, LaunchApiInstance(repository))
 command_bus.register(StopApiInstanceCommand, StopApiInstance(repository))
 # Queries
 query_bus.register(SearchApiQuery, SearchApi(repository))
+query_bus.register(GetApisQuery, GetApis(repository))

@@ -61,3 +61,13 @@ class Repository(IRepository):
         delete_count = self.__db.delete_one({'_id': ObjectId(api_id)}).deleted_count
         if delete_count == 0:
             raise DomainBadRequestError(f'This api {api_id} not exist')
+
+    def get_apis(self):
+        logger.info(f'Get all apis')
+        apis_cursor = self.__db.find()
+        api_list = []
+        for api in apis_cursor:
+            api['_id'] = str(api['_id'])
+            api_list.append(api)
+
+        return {'apis': api_list}

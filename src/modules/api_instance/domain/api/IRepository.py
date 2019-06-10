@@ -8,3 +8,5 @@ class IRepository:
     def search(self, api_id: str) -> ApiInstance: pass
 
     def delete(self, api_id: str) -> None: pass
+
+    def get_apis(self): pass
