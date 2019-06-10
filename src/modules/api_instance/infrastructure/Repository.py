@@ -2,7 +2,9 @@ from bson import ObjectId
 
 from modules.api_instance.domain.api import ApiInstance
 from modules.api_instance.domain.api import IRepository
+from modules.api_instance.domain.api import Path
 from modules.api_instance.domain.api import Port
+from modules.api_instance.domain.api import Resource
 from modules.api_instance.domain.api import Response
 from modules.api_instance.domain.api import Route
 from modules.api_instance.domain.api import Settings
@@ -40,19 +42,18 @@ class Repository(IRepository):
         if api_dict is None:
             raise DomainDontFoundError(f'Not exist api instance {api_id}')
 
-        paths = Paths()
-        for path_dict in api_dict['paths']:
-            paths.add_route(Route(
-                path=path_dict['path'],
-                method=path_dict['method'],
-                response=Response(path_dict['response']),
-                _id=str(path_dict['_id'])
-            ))
+        paths = []
+        for path_dict in api_dict['routes']:
+            resources = []
+            for resource in path_dict['resources']:
+                resources.append(Resource(resource['method'], Response(resource['response'])))
+
+            paths.append(Path(path_dict['path'], resources))
 
         return ApiInstance(
             name=api_dict['name'],
             port=Port(api_dict['port']),
-            paths=paths,
+            paths=Paths(paths),
             settings=Settings(api_dict['settings']['enabled'], created_on=api_dict['settings']['created_on']),
             _id=str(api_dict['_id'])
         )
