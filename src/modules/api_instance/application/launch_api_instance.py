@@ -23,7 +23,7 @@ class LaunchApiInstance(IUseCase):
         logger.info(f'Launch api {api._id} in port {api.port.value}')
         if api.settings.enabled is True:
             raise ServerIsRunning(f'The server is running in port {api.port.value}')
-        if len(api.routes) == 0:
+        if len(api.get_list_paths()) == 0:
             raise DomainBadRequestError(f'this API: {api._id} does not have routes')
         api.settings.enabled = True
         self.repository.save(api)
