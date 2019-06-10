@@ -48,3 +48,9 @@ class Path(IEntity):
             'path': self.path,
             'resources': [resource.__dict__ for resource in self.resources]
         }
+
+    def get_resource_by_method(self, method: str):
+        for index, resource in enumerate(self.resources):
+            if resource.method == method:
+                return self.resources[index]
+        return None

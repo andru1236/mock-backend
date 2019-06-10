@@ -29,6 +29,8 @@ class Paths:
 
     def update_route(self, route: Route):
         path = self.get_path_with_this(route)
+        if path is None:
+            raise DomainBadRequestError(f'This path {route.path} not exist')
         path.update_resource(Resource(route.method, route.response))
 
     def get_path_with_this(self, route: Route):
