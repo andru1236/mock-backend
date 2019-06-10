@@ -7,7 +7,7 @@ from modules.shared.domain import IAggregate
 
 class ApiInstance(IAggregate):
 
-    def __init__(self, name: str, port: Port, paths: Paths = None, settings: Settings = Settings(),
+    def __init__(self, name: str, port: Port, paths: Paths = Paths(), settings: Settings = Settings(),
                  _id: str = '') -> None:
         super().__init__(_id)
         self.name = name
@@ -34,7 +34,7 @@ class ApiInstance(IAggregate):
         object_dict = {
             '_id': self._id,
             'name': self.name,
-            'paths': self.port.value,
+            'port': self.port.value,
             'routes': self.paths.get_object_dict(),
             'settings': self.settings.__dict__
         }

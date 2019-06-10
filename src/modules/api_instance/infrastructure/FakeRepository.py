@@ -20,7 +20,7 @@ class FakeRepository(IRepository):
             for api in self.apis:
                 if api._id == api_instance._id:
                     api.name = api_instance.name
-                    api.routes = api_instance.routes
+                    api.paths = api_instance.paths
                     api.port = api_instance.port
                     api.settings = api_instance.settings
 

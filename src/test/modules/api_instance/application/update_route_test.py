@@ -22,10 +22,10 @@ def test_update_route():
     response_test = {"test": "test"}
     add_route.execute(AddRouteCommand(api_id, 'users', 'get', response_test))
 
-    assert api.routes[0].response.value == response_test
+    assert api.get_list_paths()[0].resources[0].response == response_test
 
     updated_response = {"update": "update"}
 
     use_case.execute(UpdateRouteCommand(api_id, 'users', 'get', updated_response))
 
-    assert api.routes[0].response.value == updated_response
+    assert api.get_list_paths()[0].resources[0].response == updated_response

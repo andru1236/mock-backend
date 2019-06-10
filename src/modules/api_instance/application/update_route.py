@@ -8,7 +8,7 @@ from modules.shared.infrastructure import logger
 
 class UpdateRouteCommand(ICommand):
 
-    def __init__(self, api_id: str, path: str, method: str, response: str) -> None:
+    def __init__(self, api_id: str, path: str, method: str, response) -> None:
         self.api_id = api_id
         self.path = path
         self.method = method

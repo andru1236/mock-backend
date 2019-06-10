@@ -27,6 +27,9 @@ class Paths:
 
         path.remove_resource(Resource(route.method, route.response))
 
+        if len(path.resources) == 0:
+            self.__path_garbage_collector(path)
+
     def update_route(self, route: Route):
         path = self.get_path_with_this(route)
         if path is None:
@@ -41,3 +44,9 @@ class Paths:
 
     def get_object_dict(self):
         return [path.get_object_dict() for path in self.paths]
+
+    def __path_garbage_collector(self, path):
+        for index, p in enumerate(self.paths):
+            if p.path == path.path:
+                del self.paths[index]
+                break

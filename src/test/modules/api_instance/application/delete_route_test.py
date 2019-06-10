@@ -18,10 +18,10 @@ def test_delete_route_from_api():
     add_route.execute(AddRouteCommand(api._id, 'users', 'get', {"test": "test"}))
 
     insert_one_route_to_api = 1
-    assert len(api.routes) == insert_one_route_to_api
+    assert len(api.get_list_paths()) == insert_one_route_to_api
 
     delete_route = DeleteRoute(repository)
     delete_route.execute(DeleteRouteCommand(api._id, 'users', 'get'))
 
     without_routes = 0
-    assert len(api.routes) == without_routes
+    assert len(api.get_list_paths()) == without_routes
