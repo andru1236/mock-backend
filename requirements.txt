@@ -13,6 +13,7 @@ itsdangerous==1.1.0
 jedi==0.13.3
 Jinja2==2.10.1
 jsonschema==3.0.1
+logzero==1.5.0
 MarkupSafe==1.1.1
 more-itertools==7.0.0
 packaging==19.0
