@@ -3,7 +3,6 @@ from flask_restplus import Api
 
 from backend.controllers import api_controller
 
-
 class ApiV1:
 
     def __init__(self) -> None:

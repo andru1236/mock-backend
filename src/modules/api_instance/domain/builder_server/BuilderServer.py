@@ -61,11 +61,14 @@ class BuilderServer:
 
             for resource in path.resources:
                 setattr(mock_class, resource.method.lower(), factory_closure(resource.response))
+            setattr(mock_class, 'methods', {'GET', 'POST', 'DELETE', 'PUT'})
             api_tenant.add_resource(mock_class, path.path)
         return api_tenant
 
     def port_is_busy(self, port: int):
+        if port == int(os.environ.get('PORT')):
+            return True
         for instance_flask in self.instances_flask:
-            if instance_flask.port == port or instance_flask.port == os.environ.get('PORT'):
+            if instance_flask.port == port:
                 return True
         return False
