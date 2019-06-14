@@ -2,3 +2,4 @@ flask-restplus
 pymongo
 logzero
 flask-cors
+pytest
