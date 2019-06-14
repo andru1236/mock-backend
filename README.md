@@ -46,3 +46,9 @@ docker-compose up -d
 # stop project
 docker-compose down
 ```
+
+## Author
+
+_Andres Gutierrez P._
+
+**andres.gutierrez@jalasoft.com**
