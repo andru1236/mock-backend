@@ -5,7 +5,8 @@ backcall==0.1.0
 Click==7.0
 decorator==4.4.0
 Flask==1.0.3
-flask-restplus==0.12.1
+Flask-Cors==3.0.9
+flask-restx==0.2.0
 importlib-metadata==0.17
 ipython==7.5.0
 ipython-genutils==0.2.0
@@ -20,7 +21,6 @@ packaging==19.0
 parso==0.4.0
 pexpect==4.7.0
 pickleshare==0.7.5
-pkg-resources==0.0.0
 pluggy==0.12.0
 prompt-toolkit==2.0.9
 ptyprocess==0.6.0
