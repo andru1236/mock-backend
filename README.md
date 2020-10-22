@@ -8,6 +8,11 @@
 + docker
 + docker-compose
 
+### Aditional requirements(On linux)
+#### On debian / ubuntu
+```bash
+sudo apt-get install gcc python3-dev
+```
 ## Run project
 ### without docker
 ```bash
