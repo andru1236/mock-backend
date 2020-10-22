@@ -3,6 +3,7 @@ from flask_restx import abort
 from modules.api_instance.domain.builder_server.errors import PortIsBusy
 from modules.api_instance.domain.builder_server.errors import ServerIsRunning
 from modules.api_instance.domain.builder_server.errors import ServerNeverWasStarting
+from modules.api_instance.domain.builder_server.errors import NotEnoughResources
 from modules.shared.domain.errors import DomainBadRequestError
 from modules.shared.domain.errors import DomainDontFoundError
 
@@ -20,4 +21,6 @@ class ErrorHandler:
         elif type(error) == ServerNeverWasStarting:
             abort(404, custom=error.__dict__)
         elif type(error) == PortIsBusy:
+            abort(400, custom=error.__dict__)
+        elif type(error) == NotEnoughResources:
             abort(400, custom=error.__dict__)
