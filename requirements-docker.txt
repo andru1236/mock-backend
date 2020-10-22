@@ -1,4 +1,4 @@
-flask-restplus
+flask-restx
 pymongo
 logzero
 flask-cors

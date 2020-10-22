@@ -3,8 +3,8 @@ import os
 from typing import List
 
 from flask import Flask
-from flask_restplus import Api
-from flask_restplus import Resource
+from flask_restx import Api
+from flask_restx import Resource
 
 from modules.api_instance.domain.api import ApiInstance
 from modules.api_instance.domain.builder_server import ServerRunnable

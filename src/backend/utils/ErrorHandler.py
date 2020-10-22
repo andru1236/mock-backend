@@ -1,4 +1,4 @@
-from flask_restplus import abort
+from flask_restx import abort
 
 from modules.api_instance.domain.builder_server.errors import PortIsBusy
 from modules.api_instance.domain.builder_server.errors import ServerIsRunning
