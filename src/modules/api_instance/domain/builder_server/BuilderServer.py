@@ -10,6 +10,9 @@ from modules.api_instance.domain.api import ApiInstance
 from modules.api_instance.domain.builder_server import ServerRunnable
 from modules.api_instance.domain.builder_server.errors import PortIsBusy
 from modules.shared.infrastructure.utils import SingletonDecorator
+from modules.api_instance.domain.builder_server.validator import Validator
+from modules.api_instance.domain.builder_server.validator import CpuValidator
+from modules.api_instance.domain.builder_server.validator import AvailabilityValidator
 
 
 @SingletonDecorator
@@ -17,12 +20,11 @@ class BuilderServer:
 
     def __init__(self) -> None:
         self.instances_flask: List[ServerRunnable] = []
+        self.validators: List[Validator] = [CpuValidator(), AvailabilityValidator()]
 
     def run_api(self, api):
+        [validator.validate(self.instances_flask, api) for validator in self.validators]
         flask_server = self.build_flask_server(api)
-
-        if self.port_is_busy(api.port.value):
-            raise PortIsBusy(f'Exists other server run on port: {api.port.value}')
 
         def executor():
             flask_server.app.run('0.0.0.0', api.port.value)
@@ -64,11 +66,3 @@ class BuilderServer:
             setattr(mock_class, 'methods', {'GET', 'POST', 'DELETE', 'PUT'})
             api_tenant.add_resource(mock_class, path.path)
         return api_tenant
-
-    def port_is_busy(self, port: int):
-        if port == int(os.environ.get('PORT')):
-            return True
-        for instance_flask in self.instances_flask:
-            if instance_flask.port == port:
-                return True
-        return False
