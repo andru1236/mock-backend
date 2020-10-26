@@ -24,6 +24,12 @@ class Resource:
             raise DomainBadRequestError(f'Param "{param.param}" not found')
         self.params[param_index] = param
 
+    def remove_params(self, param: Param):
+        param_index =  self._find_param_index(param)
+        if param_index is None:
+            raise DomainBadRequestError(f'This params {param.param} not exist')
+        del self.params[param_index]
+
     def get_object_dict(self):
         return {
             'method': self.method,

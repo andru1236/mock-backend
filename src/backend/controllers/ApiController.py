@@ -5,6 +5,7 @@ from modules.api_instance import AddRouteCommand
 from modules.api_instance import AddParamsCommand
 from modules.api_instance import DeleteApiCommand
 from modules.api_instance import DeleteRouteCommand
+from modules.api_instance import DeleteParamsCommand
 from modules.api_instance import GetApisQuery
 from modules.api_instance import LaunchApiInstanceCommand
 from modules.api_instance import RegisterApiCommand
@@ -75,6 +76,12 @@ class ParamsController(Resource):
     @end_point
     def put(self, api_id, route_id):
         return command_bus.execute(UpdateParamsCommand(api_id, route_id, **request.get_json())), 200
+
+    @end_point
+    def delete(self, api_id, route_id):
+        data = request.args
+        return command_bus.execute(DeleteParamsCommand(api_id, route_id, data['params'], data['method'])), 200
+
 
 @controller.route('/<api_id>/start')
 class StartController(Resource):

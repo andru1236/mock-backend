@@ -54,4 +54,4 @@ class Path(IEntity):
         for index, resource in enumerate(self.resources):
             if resource.method == method:
                 return self.resources[index]
-        return None
+        raise DomainBadRequestError(f'This method {method} not exist')
