@@ -43,15 +43,7 @@ class Repository(IRepository):
 
         paths = []
         for path_dict in api_dict['routes']:
-            resources = []
-            for resource in path_dict['resources']:
-                params = []
-                if resource.get('params') is not None:
-                    for param in resource['params']:
-                        params.append(Param(param['param'], Response(param['response'])))
-                resource_obj = Resource(resource['method'], Response(resource['response']), params)
-                resources.append(resource_obj)
-
+            resources = self._transform_resources_to_object(path_dict['resources'])
             paths.append(Path(path_dict['path'], resources, path_dict['_id']))
 
         return ApiInstance(
@@ -77,3 +69,23 @@ class Repository(IRepository):
             api_list.append(api)
 
         return {'apis': api_list}
+
+    def _transform_resources_to_object(self, resources_json):
+        resources = []
+        for resource in resources_json:
+            params = self._transform_params_to_object(resource.get('params'))
+
+            resource_obj = Resource(resource['method'], Response(resource['response']), params)
+            resources.append(resource_obj)
+        return resources
+
+    def _transform_params_to_object(self, params_json):
+        params = []
+        if params_json is None:
+            return params
+
+        for param in params_json:
+            param_obj = Param(param['param'], Response(param['response']))
+            params.append(param_obj)
+
+        return params

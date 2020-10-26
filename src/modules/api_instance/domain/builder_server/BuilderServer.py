@@ -51,10 +51,11 @@ class BuilderServer:
         flask_tenant = Flask(api._id)
         api_tenant = Api(flask_tenant)
 
-        def factory_closure(response):
+        def factory_closure(resource):
             def closure(self):
                 # Flask transform dict to json
-                # print(request.query_string)
+                query = request.query_string.decode()
+                response = resource.get_response(query)
                 return response, 200
 
             return closure
@@ -64,7 +65,7 @@ class BuilderServer:
             mock_class = type(path.path, (Resource, object), Resource.__dict__.copy())
 
             for resource in path.resources:
-                setattr(mock_class, resource.method.lower(), factory_closure(resource.response))
+                setattr(mock_class, resource.method.lower(), factory_closure(resource))
             setattr(mock_class, 'methods', {'GET', 'POST', 'DELETE', 'PUT'})
             api_tenant.add_resource(mock_class, path.path)
         return api_tenant

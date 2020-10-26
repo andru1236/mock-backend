@@ -30,6 +30,12 @@ class Resource:
             raise DomainBadRequestError(f'This params {param.param} not exist')
         del self.params[param_index]
 
+    def get_response(self, query_params: str):
+        for param in self.params:
+            if param.param == query_params:
+                return param.response
+        return self.response
+
     def get_object_dict(self):
         return {
             'method': self.method,
