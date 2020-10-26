@@ -27,6 +27,6 @@ class AddParams(IUseCase):
         param = Param(command.params, Response(command.response))
         api = self.repository.search(command.api_id)
         path = api.get_path_by_id(command.route_id)
-        resource = path.get_resource_by_method(command.method)
+        resource = path.get_resource_by_method(command.method.upper())
         resource.add_params(param)
         self.repository.save(api)
