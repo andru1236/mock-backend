@@ -2,8 +2,10 @@ from flask import request
 from flask_restx import Namespace, Resource
 
 from modules.api_instance import AddRouteCommand
+from modules.api_instance import AddParamsCommand
 from modules.api_instance import DeleteApiCommand
 from modules.api_instance import DeleteRouteCommand
+from modules.api_instance import DeleteParamsCommand
 from modules.api_instance import GetApisQuery
 from modules.api_instance import LaunchApiInstanceCommand
 from modules.api_instance import RegisterApiCommand
@@ -11,6 +13,7 @@ from modules.api_instance import SearchApiQuery
 from modules.api_instance import StopApiInstanceCommand
 from modules.api_instance import UpdateApiCommand
 from modules.api_instance import UpdateRouteCommand
+from modules.api_instance import UpdateParamsCommand
 from modules.api_instance import command_bus
 from modules.api_instance import query_bus
 
@@ -63,6 +66,21 @@ class RouteController(Resource):
     def delete(self, api_id):
         data = request.get_json()
         return command_bus.execute(DeleteRouteCommand(api_id, data['path'], data['method'])), 200
+
+@controller.route('/<api_id>/routes/<route_id>/params')
+class ParamsController(Resource):
+    @end_point
+    def post(self, api_id, route_id):
+        return command_bus.execute(AddParamsCommand(api_id, route_id, **request.get_json())), 201
+
+    @end_point
+    def put(self, api_id, route_id):
+        return command_bus.execute(UpdateParamsCommand(api_id, route_id, **request.get_json())), 200
+
+    @end_point
+    def delete(self, api_id, route_id):
+        data = request.args
+        return command_bus.execute(DeleteParamsCommand(api_id, route_id, data['params'], data['method'])), 200
 
 
 @controller.route('/<api_id>/start')

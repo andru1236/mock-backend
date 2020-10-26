@@ -2,6 +2,7 @@ from bson import ObjectId
 
 from modules.api_instance.domain.api import ApiInstance
 from modules.api_instance.domain.api import IRepository
+from modules.api_instance.domain.api import Param
 from modules.api_instance.domain.api import Path
 from modules.api_instance.domain.api import Paths
 from modules.api_instance.domain.api import Port
@@ -42,11 +43,8 @@ class Repository(IRepository):
 
         paths = []
         for path_dict in api_dict['routes']:
-            resources = []
-            for resource in path_dict['resources']:
-                resources.append(Resource(resource['method'], Response(resource['response'])))
-
-            paths.append(Path(path_dict['path'], resources))
+            resources = self._transform_resources_to_object(path_dict['resources'])
+            paths.append(Path(path_dict['path'], resources, path_dict['_id']))
 
         return ApiInstance(
             name=api_dict['name'],
@@ -71,3 +69,23 @@ class Repository(IRepository):
             api_list.append(api)
 
         return {'apis': api_list}
+
+    def _transform_resources_to_object(self, resources_json):
+        resources = []
+        for resource in resources_json:
+            params = self._transform_params_to_object(resource.get('params'))
+
+            resource_obj = Resource(resource['method'], Response(resource['response']), params)
+            resources.append(resource_obj)
+        return resources
+
+    def _transform_params_to_object(self, params_json):
+        params = []
+        if params_json is None:
+            return params
+
+        for param in params_json:
+            param_obj = Param(param['param'], Response(param['response']))
+            params.append(param_obj)
+
+        return params
