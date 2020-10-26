@@ -12,6 +12,7 @@ from modules.api_instance import SearchApiQuery
 from modules.api_instance import StopApiInstanceCommand
 from modules.api_instance import UpdateApiCommand
 from modules.api_instance import UpdateRouteCommand
+from modules.api_instance import UpdateParamsCommand
 from modules.api_instance import command_bus
 from modules.api_instance import query_bus
 
@@ -70,6 +71,10 @@ class ParamsController(Resource):
     @end_point
     def post(self, api_id, route_id):
         return command_bus.execute(AddParamsCommand(api_id, route_id, **request.get_json())), 201
+
+    @end_point
+    def put(self, api_id, route_id):
+        return command_bus.execute(UpdateParamsCommand(api_id, route_id, **request.get_json())), 200
 
 @controller.route('/<api_id>/start')
 class StartController(Resource):

@@ -2,6 +2,8 @@ from modules.api_instance.application.add_route import AddRoute
 from modules.api_instance.application.add_route import AddRouteCommand
 from modules.api_instance.application.add_params import AddParams
 from modules.api_instance.application.add_params import AddParamsCommand
+from modules.api_instance.application.update_params import UpdateParams
+from modules.api_instance.application.update_params import UpdateParamsCommand
 from modules.api_instance.application.delete_api import DeleteApi
 from modules.api_instance.application.delete_api import DeleteApiCommand
 from modules.api_instance.application.delete_route import DeleteRoute
@@ -40,6 +42,7 @@ command_bus.register(UpdateRouteCommand, UpdateRoute(repository))
 command_bus.register(LaunchApiInstanceCommand, LaunchApiInstance(repository))
 command_bus.register(StopApiInstanceCommand, StopApiInstance(repository))
 command_bus.register(AddParamsCommand, AddParams(repository))
+command_bus.register(UpdateParamsCommand, UpdateParams(repository))
 # Queries
 query_bus.register(SearchApiQuery, SearchApi(repository))
 query_bus.register(GetApisQuery, GetApis(repository))

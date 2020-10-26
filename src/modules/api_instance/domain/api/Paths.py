@@ -47,7 +47,7 @@ class Paths:
             print(path._id, id_path)
             if path._id == id_path:
                 return path
-        raise Exception('Path not found')
+        raise DomainBadRequestError(f'This path id {id_path} not exist')
 
     def get_object_dict(self):
         return [path.get_object_dict() for path in self.paths]

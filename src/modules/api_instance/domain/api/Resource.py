@@ -1,6 +1,7 @@
 from typing import List
 from modules.api_instance.domain.api import Param
 from modules.api_instance.domain.api import Response
+from modules.shared.domain.errors import DomainBadRequestError
 
 
 class Resource:
@@ -12,11 +13,17 @@ class Resource:
     def is_equals(self, resource):
         return self.method == resource.method
 
-    def add_params(self, param:Param):
-        if self._contains_param(param):
-            raise Exception('Params already registered')
+    def add_params(self, param: Param):
+        if self._find_param_index(param):
+            raise DomainBadRequestError(f'This param "{param.param}" already exist')
         self.params.append(param)
-    
+
+    def replace_params(self, param: Param):
+        param_index =  self._find_param_index(param)
+        if param_index is None:
+            raise DomainBadRequestError(f'Param "{param.param}" not found')
+        self.params[param_index] = param
+
     def get_object_dict(self):
         return {
             'method': self.method,
@@ -24,7 +31,7 @@ class Resource:
             'params': [param.__dict__ for param in self.params]
         }
 
-    def _contains_param(self, new_param: Param):
-        for param in self.params:
+    def _find_param_index(self, new_param: Param):
+        for index, param in enumerate(self.params):
             if param.param == new_param.param:
-                return param
+                return index
