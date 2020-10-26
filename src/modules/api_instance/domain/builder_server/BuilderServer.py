@@ -2,6 +2,7 @@ import multiprocessing
 import os
 from typing import List
 
+from flask import request
 from flask import Flask
 from flask_restx import Api
 from flask_restx import Resource
@@ -53,6 +54,7 @@ class BuilderServer:
         def factory_closure(response):
             def closure(self):
                 # Flask transform dict to json
+                # print(request.query_string)
                 return response, 200
 
             return closure

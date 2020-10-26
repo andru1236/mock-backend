@@ -2,6 +2,7 @@ from flask import request
 from flask_restx import Namespace, Resource
 
 from modules.api_instance import AddRouteCommand
+from modules.api_instance import AddParamsCommand
 from modules.api_instance import DeleteApiCommand
 from modules.api_instance import DeleteRouteCommand
 from modules.api_instance import GetApisQuery
@@ -64,6 +65,11 @@ class RouteController(Resource):
         data = request.get_json()
         return command_bus.execute(DeleteRouteCommand(api_id, data['path'], data['method'])), 200
 
+@controller.route('/<api_id>/routes/<route_id>/params')
+class ParamsController(Resource):
+    @end_point
+    def post(self, api_id, route_id):
+        return command_bus.execute(AddParamsCommand(api_id, route_id, **request.get_json())), 201
 
 @controller.route('/<api_id>/start')
 class StartController(Resource):

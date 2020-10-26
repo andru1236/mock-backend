@@ -2,6 +2,7 @@ from bson import ObjectId
 
 from modules.api_instance.domain.api import ApiInstance
 from modules.api_instance.domain.api import IRepository
+from modules.api_instance.domain.api import Param
 from modules.api_instance.domain.api import Path
 from modules.api_instance.domain.api import Paths
 from modules.api_instance.domain.api import Port
@@ -44,9 +45,14 @@ class Repository(IRepository):
         for path_dict in api_dict['routes']:
             resources = []
             for resource in path_dict['resources']:
-                resources.append(Resource(resource['method'], Response(resource['response'])))
+                params = []
+                if resource.get('params') is not None:
+                    for param in resource['params']:
+                        params.append(Param(param['param'], Response(param['response'])))
+                resource_obj = Resource(resource['method'], Response(resource['response']), params)
+                resources.append(resource_obj)
 
-            paths.append(Path(path_dict['path'], resources))
+            paths.append(Path(path_dict['path'], resources, path_dict['_id']))
 
         return ApiInstance(
             name=api_dict['name'],

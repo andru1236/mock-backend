@@ -47,7 +47,7 @@ class Path(IEntity):
         return {
             '_id': self._id,
             'path': self.path,
-            'resources': [resource.__dict__ for resource in self.resources]
+            'resources': [resource.get_object_dict() for resource in self.resources]
         }
 
     def get_resource_by_method(self, method: str):

@@ -42,6 +42,13 @@ class Paths:
                 return self.paths[index]
         return None
 
+    def get_path_by_id(self, id_path: str):
+        for path in self.paths:
+            print(path._id, id_path)
+            if path._id == id_path:
+                return path
+        raise Exception('Path not found')
+
     def get_object_dict(self):
         return [path.get_object_dict() for path in self.paths]
 
