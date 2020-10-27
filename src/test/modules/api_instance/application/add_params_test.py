@@ -23,10 +23,10 @@ def test_add_params_to_path():
     api = repository.apis[0]
 
     add_route = AddRoute(repository)
-    add_route.execute(AddRouteCommand(api._id, 'users', 'get', {"test": "test"}))
+    add_route.execute(AddRouteCommand(api._id, '/users', 'get', {"test": "test"}))
 
     # Test
-    path = api.paths.get_path_with_this(Route('users', 'get', Response({})))
+    path = api.paths.get_path_with_this(Route('/users', 'get', Response({})))
 
     add_params = AddParams(repository)
     add_params.execute(AddParamsCommand(api._id, path._id, 'page=2', 'GET', {}))

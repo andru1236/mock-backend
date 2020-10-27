@@ -70,4 +70,4 @@ def test_get_object_dict_of_paths():
 
     expected_dict = [user_path.get_object_dict(), admin_path.get_object_dict()]
 
-    assert paths.get_object_dict() == expected_dict
+    assert [ path for path in paths.get_object_dict() if path not in expected_dict]

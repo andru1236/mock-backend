@@ -84,25 +84,27 @@ def test_get_dict_object_from_path():
     path.add_resource(resource_get)
     path.add_resource(resource_post)
     path.add_resource(resource_put)
-
     expected_dict = {
         '_id': path._id,
         'path': '/users',
         'resources': [
             {
                 'method': 'GET',
+                'params': [],
                 'response': {
                     'test': 'test'
                 }
             },
             {
                 'method': 'POST',
+                'params': [],
                 'response': {
                     'test_post': 'test_post'
                 }
             },
             {
                 'method': 'PUT',
+                'params': [],
                 'response': {
                     'test_put': 'test_put'
                 }
