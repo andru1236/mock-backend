@@ -1,14 +1,12 @@
 from typing import List
 
-from bson import ObjectId
-
-from modules.api_instance.domain.api import Resource
 from modules.shared.domain import IEntity
 from modules.shared.domain.errors import DomainBadRequestError
 
+from modules.api_instance.domain.api import Resource
 
 class Path(IEntity):
-    def __init__(self, path: str, resources: List[Resource] = None, _id: str = str(ObjectId())) -> None:
+    def __init__(self, path: str, resources: List[Resource] = None, _id: str = None) -> None:
         super().__init__(_id)
         self.path = path
         self.resources = [] if resources is None else resources

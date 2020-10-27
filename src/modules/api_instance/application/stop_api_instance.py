@@ -20,7 +20,7 @@ class StopApiInstance(IUseCase):
 
     def execute(self, command: StopApiInstanceCommand) -> None or IResponse:
         api = self.repository.search(command.api_id)
-        logger.info(f'The api {api._id} in port {api.port} will be stopped')
+        logger.info(f'The api {api._id} in port {api.port.value} will be stopped')
         if api.settings.enabled is False:
             raise ServerNeverWasStarting(f'The never was starting')
         api.settings.enabled = False
