@@ -24,7 +24,9 @@ class BuilderServer:
         self.validators: List[Validator] = [CpuValidator(), AvailabilityValidator()]
 
     def run_api(self, api):
-        [validator.validate(self.instances_flask, api) for validator in self.validators]
+        for validator in self.validators:
+            validator.validate(self.instances_flask, api)
+
         flask_server = self.build_flask_server(api)
 
         def executor():

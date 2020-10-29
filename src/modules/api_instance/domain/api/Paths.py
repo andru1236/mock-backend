@@ -44,7 +44,6 @@ class Paths:
 
     def get_path_by_id(self, id_path: str):
         for path in self.paths:
-            print(path._id, id_path)
             if path._id == id_path:
                 return path
         raise DomainBadRequestError(f'This path id {id_path} not exist')

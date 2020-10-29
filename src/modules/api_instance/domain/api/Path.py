@@ -32,14 +32,12 @@ class Path(IEntity):
         found = False
         for index, resource in enumerate(self.resources):
             if resource.is_equals(new_resource):
-                del self.resources[index]
+                self.resources[index].response = new_resource.response
                 found = True
                 break
 
         if found is False:
             raise DomainBadRequestError(f'This method {new_resource.method} not exist in {self.path}')
-
-        self.resources.append(new_resource)
 
     def get_object_dict(self):
         return {

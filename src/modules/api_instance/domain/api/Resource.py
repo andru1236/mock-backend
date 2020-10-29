@@ -14,9 +14,10 @@ class Resource:
         return self.method == resource.method
 
     def add_params(self, param: Param):
-        if self._find_param_index(param):
+        if self._find_param_index(param) is None:
+            self.params.append(param)
+        else:
             raise DomainBadRequestError(f'This param "{param.param}" already exist')
-        self.params.append(param)
 
     def replace_params(self, param: Param):
         param_index =  self._find_param_index(param)
