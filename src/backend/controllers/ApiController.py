@@ -79,7 +79,7 @@ class ParamsController(Resource):
 
     @end_point
     def delete(self, api_id, route_id):
-        data = request.args
+        data = request.get_json()
         return command_bus.execute(DeleteParamsCommand(api_id, route_id, data['params'], data['method'])), 200
 
 
