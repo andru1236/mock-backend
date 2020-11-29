@@ -14,6 +14,12 @@
 sudo apt-get install gcc python3-dev
 ```
 ## Run project
+### Automatic
+```bash
+make install
+make start
+make test # To run the test
+```
 ### without docker
 ```bash
 git clone $(link_repository)
