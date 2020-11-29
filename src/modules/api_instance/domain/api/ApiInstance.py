@@ -7,12 +7,12 @@ from modules.shared.domain import IAggregate
 
 class ApiInstance(IAggregate):
 
-    def __init__(self, name: str, port: Port, paths: Paths = Paths(), settings: Settings = Settings(),
+    def __init__(self, name: str, port: Port, paths: Paths = None, settings: Settings = Settings(),
                  _id: str = '') -> None:
         super().__init__(_id)
         self.name = name
         self.port: Port = port
-        self.paths: Paths = paths
+        self.paths: Paths = Paths() if paths is None else paths
         self.settings = settings
 
     def add_route(self, new_route: Route):

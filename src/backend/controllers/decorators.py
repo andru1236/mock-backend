@@ -6,7 +6,7 @@ from modules.shared.domain.errors import DomainBaseError
 from modules.shared.infrastructure import logger
 
 
-def end_point(f):
+def return_with_custom_format(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         try:
@@ -18,7 +18,7 @@ def end_point(f):
             ErrorHandler.catch(error)
 
         except Exception as error:
-            logger.critical(error)
+            logger.error(error)
             raise error
 
     return decorated

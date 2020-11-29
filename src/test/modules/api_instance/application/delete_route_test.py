@@ -1,8 +1,10 @@
 from modules.api_instance.application.delete_route import DeleteRoute, DeleteRouteCommand
 from modules.api_instance.application.add_route import AddRoute, AddRouteCommand
 from modules.api_instance.application.register_api import RegisterApi, RegisterApiCommand
+from modules.api_instance.infrastructure import FakeRepository
 
-def test_delete_route_from_api(repository):
+def test_delete_route_from_api():
+    repository = FakeRepository()
     register_api = RegisterApi(repository)
     register_api.execute(RegisterApiCommand('test', 8000))
 

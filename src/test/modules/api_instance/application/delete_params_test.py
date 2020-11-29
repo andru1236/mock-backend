@@ -2,8 +2,6 @@ from modules.api_instance.application.add_route import Route
 from modules.api_instance.application.add_route import Response
 from modules.api_instance import AddRoute
 from modules.api_instance import AddRouteCommand
-from modules.api_instance import DeleteRoute
-from modules.api_instance import DeleteRouteCommand
 from modules.api_instance import RegisterApi
 from modules.api_instance import RegisterApiCommand
 
