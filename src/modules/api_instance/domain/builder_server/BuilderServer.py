@@ -1,5 +1,4 @@
 import multiprocessing
-import os
 from typing import List
 
 from flask import request
@@ -9,11 +8,10 @@ from flask_restx import Resource
 
 from modules.api_instance.domain.api import ApiInstance
 from modules.api_instance.domain.builder_server import ServerRunnable
-from modules.api_instance.domain.builder_server.errors import PortIsBusy
-from modules.shared.infrastructure.utils import SingletonDecorator
 from modules.api_instance.domain.builder_server.validator import Validator
 from modules.api_instance.domain.builder_server.validator import CpuValidator
 from modules.api_instance.domain.builder_server.validator import AvailabilityValidator
+from modules.shared.infrastructure.utils import SingletonDecorator
 
 
 @SingletonDecorator

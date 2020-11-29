@@ -1,8 +1,11 @@
 from modules.api_instance.application.update_route import UpdateRoute, UpdateRouteCommand
 from modules.api_instance.application.add_route import AddRoute, AddRouteCommand
 from modules.api_instance.application.register_api import RegisterApi, RegisterApiCommand
+from modules.api_instance.infrastructure import FakeRepository
 
-def test_update_route(repository):
+
+def test_update_route():
+    repository = FakeRepository()
     register_api = RegisterApi(repository)
     add_route = AddRoute(repository)
     use_case = UpdateRoute(repository)

@@ -1,32 +1,21 @@
-from modules.api_instance.application.add_route import AddRoute
-from modules.api_instance.application.add_route import AddRouteCommand
-from modules.api_instance.application.add_params import AddParams
-from modules.api_instance.application.add_params import AddParamsCommand
-from modules.api_instance.application.update_params import UpdateParams
-from modules.api_instance.application.update_params import UpdateParamsCommand
-from modules.api_instance.application.delete_params import DeleteParams
-from modules.api_instance.application.delete_params import DeleteParamsCommand
-from modules.api_instance.application.delete_api import DeleteApi
-from modules.api_instance.application.delete_api import DeleteApiCommand
-from modules.api_instance.application.delete_route import DeleteRoute
-from modules.api_instance.application.delete_route import DeleteRouteCommand
-from modules.api_instance.application.launch_api_instance import LaunchApiInstance
-from modules.api_instance.application.launch_api_instance import LaunchApiInstanceCommand
-from modules.api_instance.application.register_api import RegisterApi
-from modules.api_instance.application.register_api import RegisterApiCommand
-from modules.api_instance.application.search_api import SearchApi
-from modules.api_instance.application.search_api import SearchApiQuery
-from modules.api_instance.application.stop_api_instance import StopApiInstance
-from modules.api_instance.application.stop_api_instance import StopApiInstanceCommand
-from modules.api_instance.application.update_api import UpdateApi
-from modules.api_instance.application.update_api import UpdateApiCommand
-from modules.api_instance.application.update_route import UpdateRoute
-from modules.api_instance.application.update_route import UpdateRouteCommand
-from modules.api_instance.application.get_apis import GetApis
-from modules.api_instance.application.get_apis import GetApisQuery
+# Features
+from modules.api_instance.application.add_route import AddRoute, AddRouteCommand
+from modules.api_instance.application.add_params import AddParams, AddParamsCommand
+from modules.api_instance.application.update_params import UpdateParams, UpdateParamsCommand
+from modules.api_instance.application.delete_params import DeleteParams, DeleteParamsCommand
+from modules.api_instance.application.delete_api import DeleteApi, DeleteApiCommand
+from modules.api_instance.application.delete_route import DeleteRoute, DeleteRouteCommand
+from modules.api_instance.application.launch_api_instance import LaunchApiInstance, LaunchApiInstanceCommand
+from modules.api_instance.application.register_api import RegisterApi, RegisterApiCommand
+from modules.api_instance.application.search_api import SearchApi, SearchApiQuery
+from modules.api_instance.application.stop_api_instance import StopApiInstance, StopApiInstanceCommand
+from modules.api_instance.application.update_api import UpdateApi, UpdateApiCommand
+from modules.api_instance.application.update_route import UpdateRoute, UpdateRouteCommand
+from modules.api_instance.application.get_apis import GetApis, GetApisQuery
+
+from modules.shared.infrastructure import CommandBus, QueryBus
+
 from modules.api_instance.infrastructure import Repository
-from modules.shared.infrastructure import CommandBus
-from modules.shared.infrastructure import QueryBus
 
 # Builder module
 repository = Repository()

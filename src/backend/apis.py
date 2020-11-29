@@ -3,6 +3,7 @@ from flask_restx import Api
 
 from backend.controllers import api_controller
 
+
 class ApiV1:
 
     def __init__(self) -> None:
@@ -19,3 +20,6 @@ class ApiV1:
     def build_controllers(self):
         for controller in self.controllers:
             self.api.add_namespace(controller)
+
+
+api_v1 = ApiV1().app

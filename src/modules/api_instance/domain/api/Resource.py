@@ -5,10 +5,10 @@ from modules.shared.domain.errors import DomainBadRequestError
 
 
 class Resource:
-    def __init__(self, method: str, response: Response, params: List[Param]=[]) -> None:
+    def __init__(self, method: str, response: Response, params: List[Param]=None) -> None:
         self.method = method
         self.response = response.value
-        self.params = params
+        self.params = [] if params is None else params
 
     def is_equals(self, resource):
         return self.method == resource.method

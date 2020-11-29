@@ -1,4 +1,4 @@
-FROM python:3.6-alpine
+FROM python:3.9-alpine
 RUN apk add --update gcc libc-dev linux-headers && rm -rf /var/cache/apk/*
 WORKDIR /app
 COPY requirements-docker.txt /app
