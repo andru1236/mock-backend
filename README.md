@@ -60,6 +60,6 @@ docker-compose down
 
 ## Author
 
-_Andres Gutierrez P._
+_Andres Gutierrez P_
 
-**andres.gutierrez@jalasoft.com**
+**andru1236@gmail.com**
