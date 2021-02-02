@@ -1,5 +1,5 @@
 from typing import List
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 
 from modules.api_instance.domain.api import Response as ResponseAPIInstance
@@ -10,21 +10,25 @@ from modules.shared.domain.errors import DomainBaseError
 class RoutesTracking:
     path: str
     method: str
-    query_params: List[str]
-    date: datetime
+    query_params: List[str] = field(default_factory=list)
+    date: datetime = field(default=datetime.now())
 
 @dataclass
 class TrackingAssignation:
     api_id: str
-    routes: List[RoutesTracking]
+    routes: List[RoutesTracking] = field(default_factory=list)
 
 
 @dataclass
 class Response:
     name: str
     response: ResponseAPIInstance
-    tracking_assignation: List[TrackingAssignation]
+    tracking_assignation: List[TrackingAssignation] = field(default_factory=list)
     _id: str = None
+    created_on: datetime = field(default=datetime.now())
+
+    def __post_init__(self):
+        self.response = ResponseAPIInstance(self.response)
 
 
 def validation(response: Response):

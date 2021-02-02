@@ -1,5 +1,3 @@
-from json import loads
-
 from modules.shared.domain.errors import DomainBadRequestError
 
 
@@ -21,4 +19,4 @@ class Response:
         #     raise DomainBadRequestError('The response is not a json')
 
     def __repr__(self) -> str:
-        return str(self.value)
+        return f'Response API Domain {str(self.value)}'

@@ -15,6 +15,7 @@ db = db[NAME_DB_COLLECTION]
 def factory(data):
     convert_tuple = list(data[1]) 
     convert_tuple[1] = convert_tuple[1].value # the [1] is the response 
+    data[1] = tuple(convert_tuple)
     return dict(data)
 
 
