@@ -19,3 +19,6 @@ class Response:
         #     self.value = response
         # except ValueError:
         #     raise DomainBadRequestError('The response is not a json')
+
+    def __repr__(self) -> str:
+        return str(self.value)
