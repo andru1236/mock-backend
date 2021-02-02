@@ -18,17 +18,28 @@ class TrackingAssignation:
     api_id: str
     routes: List[RoutesTracking] = field(default_factory=list)
 
+    def __post_init__(self):
+        if len(self.routes):
+            self.routes = list(
+                map(lambda route: RoutesTracking(**route) if not isinstance(route, RoutesTracking) else route , self.routes))
 
+
+######################
+######### MAIN CLASS 
+######################
 @dataclass
 class Response:
     name: str
     response: ResponseAPIInstance
-    tracking_assignation: List[TrackingAssignation] = field(default_factory=list)
+    tracking_assignations: List[TrackingAssignation] = field(default_factory=list)
     _id: str = None
     created_on: datetime = field(default=datetime.now())
 
     def __post_init__(self):
         self.response = ResponseAPIInstance(self.response)
+        if len(self.tracking_assignations):
+            self.tracking_assignations = list(
+                map(lambda track: TrackingAssignation(**track) if not isinstance(track, TrackingAssignation) else track , self.tracking_assignations))
 
 
 def validation(response: Response):
@@ -38,7 +49,7 @@ def validation(response: Response):
     if not isinstance(response.response, ResponseAPIInstance):
         raise DomainBaseError('The response should be a dict or list of dicts')
 
-    if response.tracking_assignation is not None and not isinstance(response.tracking_assignation, list):
+    if response.tracking_assignations is not None and not isinstance(response.tracking_assignations, list):
         raise DomainBaseError('The assignation should be list of objects')
 
     return response
