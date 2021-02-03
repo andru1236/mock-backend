@@ -11,16 +11,10 @@ NAME_DB_COLLECTION = 'RESPONSES'
 db = MongoConnection.get_connection()
 db = db[NAME_DB_COLLECTION]
 
-# conver the response object to dict using asdict
-def factory(data):
-    convert_tuple = list(data[1]) 
-    convert_tuple[1] = convert_tuple[1].value # the [1] is the response 
-    data[1] = tuple(convert_tuple)
-    return dict(data)
-
 
 def save(response: domain.Response):
-    response_dict = asdict(response, dict_factory=factory)
+    response_dict = asdict(response)
+    
     if response._id is not None:
         db.update_one({'_id': ObjectId(response._id)}, {
             '$set': response_dict

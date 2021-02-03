@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 
 from modules.shared.domain import IUseCase
 
@@ -17,6 +17,4 @@ class FindAResponse(IUseCase):
 
     def execute(self, command: FindAResponseCommand) -> None:
         response: domain.Response = self.repository.search(command.response_id)
-        print(response)
-        print(type(response.tracking_assignations))
-
+        return asdict(response)

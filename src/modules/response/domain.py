@@ -1,9 +1,8 @@
-from typing import List
 from dataclasses import dataclass, field
 from datetime import datetime
+from typing import List
 
-from modules.api_instance.domain.api import Response as ResponseAPIInstance
-from modules.shared.domain.errors import DomainBaseError
+from modules.shared.domain.errors import DomainBadRequestError
 
 
 @dataclass
@@ -30,13 +29,12 @@ class TrackingAssignation:
 @dataclass
 class Response:
     name: str
-    response: ResponseAPIInstance
+    response: dict or list
     tracking_assignations: List[TrackingAssignation] = field(default_factory=list)
     _id: str = None
     created_on: datetime = field(default=datetime.now())
 
     def __post_init__(self):
-        self.response = ResponseAPIInstance(self.response)
         if len(self.tracking_assignations):
             self.tracking_assignations = list(
                 map(lambda track: TrackingAssignation(**track) if not isinstance(track, TrackingAssignation) else track , self.tracking_assignations))
@@ -44,13 +42,15 @@ class Response:
 
 def validation(response: Response):
     if not isinstance(response.name, str):
-        raise DomainBaseError('The name should be string or different to None')
+        raise DomainBadRequestError('The name should be string or different to None')
 
-    if not isinstance(response.response, ResponseAPIInstance):
-        raise DomainBaseError('The response should be a dict or list of dicts')
+    if not isinstance(response.response, dict):
+        if not isinstance(response.response, list):
+            raise DomainBadRequestError('The response should be a dict or list of dicts')
+
 
     if response.tracking_assignations is not None and not isinstance(response.tracking_assignations, list):
-        raise DomainBaseError('The assignation should be list of objects')
+        raise DomainBadRequestError('The assignation should be list of objects')
 
     return response
 
