@@ -11,10 +11,14 @@ NAME_DB_COLLECTION = 'RESPONSES'
 db = MongoConnection.get_connection()
 db = db[NAME_DB_COLLECTION]
 
+def _parse_id_to_str(mongo_result):
+    mongo_result['_id'] = str(mongo_result['_id'])
+    return mongo_result
+
 
 def save(response: domain.Response):
     response_dict = asdict(response)
-    
+
     if response._id is not None:
         db.update_one({'_id': ObjectId(response._id)}, {
             '$set': response_dict
@@ -36,7 +40,12 @@ def search(response_id: str):
     mongo_result = db.find_one({'_id': ObjectId(response_id)})
     if mongo_result is None:
         raise DomainDontFoundError('The response does not exists')
+    _parse_id_to_str(mongo_result)
     return domain.Response(**mongo_result)
+
+def search_all(limit):
+    responses = db.find().limit(limit)
+    return list(map(_parse_id_to_str,responses))
 
     
 

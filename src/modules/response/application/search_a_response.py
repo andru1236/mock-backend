@@ -6,15 +6,15 @@ from modules.response import domain
 
 
 @dataclass
-class FindAResponseCommand:
+class SearchAResponseQuery:
     response_id: str
 
 
-class FindAResponse(IUseCase):
+class SearchAResponse(IUseCase):
 
     def __init__(self, repository) -> None:
         self.repository = repository
 
-    def execute(self, command: FindAResponseCommand) -> None:
+    def execute(self, command: SearchAResponseQuery) -> None:
         response: domain.Response = self.repository.search(command.response_id)
-        return asdict(response)
+        return asdict(domain.validation(response))
