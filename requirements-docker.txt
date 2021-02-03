@@ -2,5 +2,4 @@ flask-restx
 pymongo
 logzero
 flask-cors
-pytest
 psutil

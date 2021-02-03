@@ -8,9 +8,15 @@ start: run
 install:
 	/usr/bin/python3 -m venv pyenv
 	pyenv/bin/pip install -r requirements-docker.txt;
+	pyenv/bin/pip install -r requirements-dev.txt;
 
 run:
 	PORT=$(PORT) DB_NAME_MONGO=$(DB_NAME_MONGO) MONGO_CONNECTION=$(MONGO_CONNECTION) pyenv/bin/python src/main.py
+
+ipython:
+	pyenv/bin/pip install jedi==0.17.2
+	cd src; PORT=$(PORT) DB_NAME_MONGO=$(DB_NAME_MONGO) MONGO_CONNECTION=$(MONGO_CONNECTION) ../pyenv/bin/ipython
+
 
 clean: clean-pyc clean-env
 
