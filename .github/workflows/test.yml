@@ -7,19 +7,19 @@ jobs:
   run-tests:
     name: Run test
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9]
+        python-version: [3.7, 3.9]
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up python version ${{ matrix.python-version}} to test
+      - name: Set up python version ${{ matrix.python-version }} to test
         uses: action/setup-python@v2
         with:
-          python-version: ${{matrix.python-version}}
+          python-version: ${{ matrix.python-version }}
       
       - name: Install dependecies
         run: |
