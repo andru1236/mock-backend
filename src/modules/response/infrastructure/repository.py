@@ -6,7 +6,7 @@ from modules.shared.domain.errors import DomainDontFoundError, DomainBadRequestE
 from modules.shared.infrastructure.MongoConnection import MongoConnection
 
 
-NAME_DB_COLLECTION = 'RESPONSES'
+NAME_DB_COLLECTION = 'responses'
 
 db = MongoConnection.get_connection()
 db = db[NAME_DB_COLLECTION]
