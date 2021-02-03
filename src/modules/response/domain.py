@@ -69,7 +69,7 @@ def track_response(response: Response, meta):
                     )
                 )
                 if len(filtered_routes) == 0:
-                    filtered_assignation.append(RoutesTracking(meta.path, meta.method))
+                    filtered_assignation[0].routes.append(RoutesTracking(meta.path, meta.method))
 
                 return response
 

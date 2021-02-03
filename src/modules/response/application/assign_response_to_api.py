@@ -14,13 +14,13 @@ class AssignReponseToAPICommand:
 
 class AssignResponseToAPI(IUseCase):
 
-    def __init__(self, repository, bus: ApiServiceBus) -> None:
+    def __init__(self, repository, api_entrypoint: ApiServiceBus) -> None:
         self.repository = repository
-        self.bus = bus
+        self.api_entrypoint: ApiServiceBus = api_entrypoint
 
     def execute(self, command: AssignReponseToAPICommand) -> None:
         response: domain.Response = self.repository.search(command.response_id)
-        self.bus.updateApiRoute(
+        self.api_entrypoint.updateApiRoute(
             command.api_id,
             command.path,
             command.method,
