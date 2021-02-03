@@ -55,5 +55,32 @@ def validation(response: Response):
     return response
 
 
-def track_response(response, api):
-    pass
+# TODO: refactor the tracking meta data
+def track_response(response: Response, meta):
+    try:
+        if meta.api_id and meta.path and meta.method:
+            filtered_assignation: List[TrackingAssignation] = list(filter(lambda x : x.api_id == meta.api_id, response.tracking_assignations))
+
+            if len(filtered_assignation) != 0:
+                filtered_routes: List[RoutesTracking] = list(
+                    filter(
+                        lambda y: y.path == meta.path and y.method == meta.method,
+                        filtered_assignation[0].routes
+                    )
+                )
+                if len(filtered_routes) == 0:
+                    filtered_assignation[0].routes.append(RoutesTracking(meta.path, meta.method))
+
+                return response
+
+            track_assignation = TrackingAssignation(meta.api_id)
+            track_route = RoutesTracking(meta.path, meta.method)
+
+            track_assignation.routes.append(track_route)
+            response.tracking_assignations.append(track_assignation)
+
+            return response
+
+    except Exception:
+        raise DomainBadRequestError('The Api meta information are not valid')
+    
