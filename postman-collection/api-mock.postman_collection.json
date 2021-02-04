@@ -303,6 +303,132 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "create response",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"test\",\r\n    \"response\": {\r\n        \"field_1\": \"field_1\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_HOST}}/responses",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"responses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all responses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_HOST}}/responses",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"responses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get a response",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_HOST}}/responses/601b7294026323f0bf489fd8",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"responses",
+						"601b7294026323f0bf489fd8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update response",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"update\",\r\n    \"response\": {\r\n        \"update\": \"update\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_HOST}}/responses/601b7294026323f0bf489fd8",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"responses",
+						"601b7294026323f0bf489fd8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete response",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_HOST}}/responses/601b7294026323f0bf489fd8",
+					"host": [
+						"{{API_HOST}}"
+					],
+					"path": [
+						"responses",
+						"601b7294026323f0bf489fd8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "assing reponse to api/route",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
 		}
 	]
 }
