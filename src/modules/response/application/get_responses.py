@@ -15,4 +15,3 @@ class GetResponses(IUseCase):
 
     def execute(self, query: GetResponsesQuery) -> Dict:
         return self.repository.search_all(query.limit)
-        
