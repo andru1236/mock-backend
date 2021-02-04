@@ -10,7 +10,7 @@ class RoutesTracking:
     path: str
     method: str
     query_params: List[str] = field(default_factory=list)
-    date: datetime = field(default=datetime.now())
+    date: str = field(default=str(datetime.now()))
 
 @dataclass
 class TrackingAssignation:
@@ -32,7 +32,7 @@ class Response:
     response: dict or list
     tracking_assignations: List[TrackingAssignation] = field(default_factory=list)
     _id: str = None
-    created_on: datetime = field(default=datetime.now())
+    created_on: str = field(default=str(datetime.now()))
 
     def __post_init__(self):
         if len(self.tracking_assignations):
