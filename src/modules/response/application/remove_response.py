@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from modules.shared.domain import IUseCase
+from modules.shared.infrastructure import logger
 
 
 @dataclass
@@ -12,6 +13,7 @@ class RemoveResponse(IUseCase):
         self.repository = repository
 
     def execute(self, command: RemoveResponseCommand) -> None:
+        logger.info(f'Use case remove  response [{command.response_id}]')
         self.repository.delete(command.response_id)
 
 

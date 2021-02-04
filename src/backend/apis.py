@@ -2,6 +2,7 @@ from flask import Blueprint
 from flask_restx import Api
 
 from backend.controllers import api_controller, response_controller
+from modules.shared.infrastructure import logger
 
 
 class ApiV1:
@@ -20,6 +21,7 @@ class ApiV1:
 
     def build_controllers(self):
         for controller in self.controllers:
+            logger.info(f'Building controller: [{controller.name}]')
             self.api.add_namespace(controller)
 
 
