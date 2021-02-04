@@ -3,6 +3,7 @@ import os
 from flask import Flask
 from flask_cors import CORS
 from backend.apis import api_v1
+from modules.shared.infrastructure import logger
 
 
 class Server:
@@ -19,6 +20,7 @@ class Server:
 
     def register_apis(self):
         for api in self.apis:
+            logger.info(f'Building api {api.name}')
             self.flask_server.register_blueprint(api)
 
     def run(self):

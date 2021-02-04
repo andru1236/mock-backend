@@ -1,5 +1,6 @@
 from dataclasses import dataclass, replace, asdict
 from modules.shared.domain import IUseCase
+from modules.shared.infrastructure import logger
 from modules.response import domain
 
 
@@ -16,6 +17,7 @@ class UpdateApiResponse(IUseCase):
         self.repository = repository
 
     def execute(self, command: UpdateApiResponseCommand) -> None:
+        logger.info(f'Use case update response: [{command.response_id}]')
         found_response = self.repository.search(command.response_id)
 
         to_update = asdict(command)

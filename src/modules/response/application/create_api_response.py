@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from modules.shared.domain import IUseCase
 
 from modules.response import domain
+from modules.shared.infrastructure import logger
 
 @dataclass
 class CreateApiResponseCommand:
@@ -14,6 +15,7 @@ class CreateApiResponse(IUseCase):
         self.repository = repository
 
     def execute(self, command: CreateApiResponseCommand) -> None:
+        logger.info(f'Use case: creating new response')
         new_response = domain.Response(command.name, command.response)
         domain.validation(new_response)
         self.repository.save(new_response)
