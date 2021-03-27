@@ -1,9 +1,9 @@
 import pytest
 
-from modules.api_instance.domain.api import Path
-from modules.api_instance.domain.api import Resource
-from modules.api_instance.domain.api import Response
-from modules.api_instance.domain.api import Route
+from modules.api_instance.domain import Path
+from modules.api_instance.domain import Resource
+from modules.api_instance.domain import Response
+from modules.api_instance.domain import Route
 from modules.shared.domain.errors import DomainBadRequestError
 
 route_with_get = lambda: Route('/users', 'get', Response({'test': 'test'}))

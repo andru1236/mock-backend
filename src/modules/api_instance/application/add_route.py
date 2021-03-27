@@ -1,8 +1,5 @@
-from modules.api_instance.domain.api import IRepository
-from modules.api_instance.domain.api import Response
-from modules.api_instance.domain.api import Route
-from modules.shared.domain import ICommand
-from modules.shared.domain import IUseCase
+from modules.api_instance.domain import IRepository, Response, Route
+from modules.shared.domain import ICommand, IUseCase
 
 from modules.shared.infrastructure import logger
 

@@ -1,4 +1,4 @@
-from modules.api_instance.domain.api import Response
+from .Response import Response
 
 
 class Param:

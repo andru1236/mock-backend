@@ -2,13 +2,11 @@ from typing import List
 
 from bson import ObjectId
 
-from modules.api_instance.domain.api import ApiInstance
-from modules.api_instance.domain.api import IRepository
+from modules.api_instance.domain import ApiInstance, IRepository
 from modules.shared.domain.errors import DomainDontFoundError
 
 
 class FakeRepository(IRepository):
-
     def __init__(self) -> None:
         self.apis: List[ApiInstance] = []
 
@@ -30,7 +28,11 @@ class FakeRepository(IRepository):
             if api._id == api_id:
                 found_api = api
                 break
-        return found_api if found_api is not None else DomainDontFoundError(f'This api {api_id} not exist')
+        return (
+            found_api
+            if found_api is not None
+            else DomainDontFoundError(f"This api {api_id} not exist")
+        )
 
     def delete(self, api_id: str) -> None:
         self.apis = list(filter(lambda api: api._id != api_id, self.apis))

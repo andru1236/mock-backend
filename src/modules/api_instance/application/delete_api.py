@@ -1,6 +1,5 @@
-from modules.api_instance.domain.api import IRepository
-from modules.shared.domain import ICommand
-from modules.shared.domain import IUseCase
+from modules.api_instance.domain import IRepository
+from modules.shared.domain import ICommand, IUseCase
 from modules.shared.infrastructure import logger
 
 
@@ -10,10 +9,9 @@ class DeleteApiCommand(ICommand):
 
 
 class DeleteApi(IUseCase):
-
     def __init__(self, repository: IRepository) -> None:
         self.repository = repository
 
     def execute(self, command: DeleteApiCommand):
-        logger.info(f'Execute delete api {command.api_id}')
+        logger.info(f"Execute delete api {command.api_id}")
         self.repository.delete(command.api_id)

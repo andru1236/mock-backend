@@ -1,8 +1,8 @@
 from typing import List
 
-from modules.api_instance.domain.api import Path
-from modules.api_instance.domain.api import Resource
-from modules.api_instance.domain.api import Route
+from .Path import Path
+from .Resource import Resource
+from .Route import Route
 from modules.shared.domain.errors import DomainBadRequestError
 
 

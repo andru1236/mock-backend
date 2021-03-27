@@ -1,7 +1,7 @@
-from modules.api_instance.domain.api import Paths
-from modules.api_instance.domain.api import Port
-from modules.api_instance.domain.api import Route
-from modules.api_instance.domain.api import Settings
+from .Paths import Paths
+from .Port import Port
+from .Route import Route
+from .Settings import Settings
 from modules.shared.domain import IAggregate
 
 

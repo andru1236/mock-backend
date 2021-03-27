@@ -1,6 +1,6 @@
 from typing import List
-from modules.api_instance.domain.api import Param
-from modules.api_instance.domain.api import Response
+from .Param import Param
+from .Response import Response
 from modules.shared.domain.errors import DomainBadRequestError
 
 

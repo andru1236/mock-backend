@@ -1,6 +1,6 @@
 import pytest
 
-from modules.api_instance.domain.api import Response
+from modules.api_instance.domain import Response
 from modules.shared.domain.errors import DomainBadRequestError
 
 

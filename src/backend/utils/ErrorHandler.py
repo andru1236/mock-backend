@@ -1,11 +1,8 @@
 from flask_restx import abort
 
-from modules.api_instance.domain.builder_server.errors import PortIsBusy
-from modules.api_instance.domain.builder_server.errors import ServerIsRunning
-from modules.api_instance.domain.builder_server.errors import ServerNeverWasStarting
-from modules.api_instance.domain.builder_server.errors import NotEnoughResources
-from modules.shared.domain.errors import DomainBadRequestError
-from modules.shared.domain.errors import DomainDontFoundError
+from modules.shared.infrastructure.process_manager import PortIsBusy, NotEnoughResources
+from modules.api_instance.domain.builder_server.exceptions import ServerIsRunning, ServerNeverWasStarting
+from modules.shared.domain.errors import DomainBadRequestError, DomainDontFoundError
 
 
 class ErrorHandler:
