@@ -4,7 +4,6 @@ from modules.shared.domain import IUseCase
 from modules.shared.infrastructure import logger
 
 
-
 @dataclass
 class GetResponsesQuery:
     limit: int = 50
@@ -15,5 +14,5 @@ class GetResponses(IUseCase):
         self.repository = repository
 
     def execute(self, query: GetResponsesQuery) -> Dict:
-        logger.info(f'Use case: Get responses')        
+        logger.info(f"Use case: Get responses")
         return self.repository.search_all(query.limit)

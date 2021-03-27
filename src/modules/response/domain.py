@@ -12,6 +12,7 @@ class RoutesTracking:
     query_params: List[str] = field(default_factory=list)
     date: str = field(default=str(datetime.now()))
 
+
 @dataclass
 class TrackingAssignation:
     api_id: str
@@ -20,11 +21,17 @@ class TrackingAssignation:
     def __post_init__(self):
         if len(self.routes):
             self.routes = list(
-                map(lambda route: RoutesTracking(**route) if not isinstance(route, RoutesTracking) else route , self.routes))
+                map(
+                    lambda route: RoutesTracking(**route)
+                    if not isinstance(route, RoutesTracking)
+                    else route,
+                    self.routes,
+                )
+            )
 
 
 ######################
-######### MAIN CLASS 
+######### MAIN CLASS
 ######################
 @dataclass
 class Response:
@@ -37,20 +44,29 @@ class Response:
     def __post_init__(self):
         if len(self.tracking_assignations):
             self.tracking_assignations = list(
-                map(lambda track: TrackingAssignation(**track) if not isinstance(track, TrackingAssignation) else track , self.tracking_assignations))
+                map(
+                    lambda track: TrackingAssignation(**track)
+                    if not isinstance(track, TrackingAssignation)
+                    else track,
+                    self.tracking_assignations,
+                )
+            )
 
 
 def validation(response: Response):
     if not isinstance(response.name, str):
-        raise DomainBadRequestError('The name should be string or different to None')
+        raise DomainBadRequestError("The name should be string or different to None")
 
     if not isinstance(response.response, dict):
         if not isinstance(response.response, list):
-            raise DomainBadRequestError('The response should be a dict or list of dicts')
+            raise DomainBadRequestError(
+                "The response should be a dict or list of dicts"
+            )
 
-
-    if response.tracking_assignations is not None and not isinstance(response.tracking_assignations, list):
-        raise DomainBadRequestError('The assignation should be list of objects')
+    if response.tracking_assignations is not None and not isinstance(
+        response.tracking_assignations, list
+    ):
+        raise DomainBadRequestError("The assignation should be list of objects")
 
     return response
 
@@ -59,17 +75,23 @@ def validation(response: Response):
 def track_response(response: Response, meta):
     try:
         if meta.api_id and meta.path and meta.method:
-            filtered_assignation: List[TrackingAssignation] = list(filter(lambda x : x.api_id == meta.api_id, response.tracking_assignations))
+            filtered_assignation: List[TrackingAssignation] = list(
+                filter(
+                    lambda x: x.api_id == meta.api_id, response.tracking_assignations
+                )
+            )
 
             if len(filtered_assignation) != 0:
                 filtered_routes: List[RoutesTracking] = list(
                     filter(
                         lambda y: y.path == meta.path and y.method == meta.method,
-                        filtered_assignation[0].routes
+                        filtered_assignation[0].routes,
                     )
                 )
                 if len(filtered_routes) == 0:
-                    filtered_assignation[0].routes.append(RoutesTracking(meta.path, meta.method))
+                    filtered_assignation[0].routes.append(
+                        RoutesTracking(meta.path, meta.method)
+                    )
 
                 return response
 
@@ -82,5 +104,4 @@ def track_response(response: Response, meta):
             return response
 
     except Exception:
-        raise DomainBadRequestError('The Api meta information are not valid')
-    
+        raise DomainBadRequestError("The Api meta information are not valid")

@@ -13,7 +13,5 @@ class RemoveResponse(IUseCase):
         self.repository = repository
 
     def execute(self, command: RemoveResponseCommand) -> None:
-        logger.info(f'Use case remove  response [{command.response_id}]')
+        logger.info(f"Use case remove  response [{command.response_id}]")
         self.repository.delete(command.response_id)
-
-

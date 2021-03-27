@@ -1,7 +1,7 @@
 from flask_restx import abort
 
 from modules.shared.infrastructure.process_manager import PortIsBusy, NotEnoughResources
-from modules.api_instance.domain.builder_server.exceptions import ServerIsRunning, ServerNeverWasStarting
+from modules.api_instance.domain.exceptions import ServerIsRunning, ServerNeverWasStarting
 from modules.shared.domain.errors import DomainBadRequestError, DomainDontFoundError
 
 
