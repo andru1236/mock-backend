@@ -23,9 +23,10 @@ def valid_cpu_resources(total_process: int) -> bool:
     def is_there_enough_cores():
         try:
             cpus = psutil.Process().cpu_affinity()
+            return total_process < len(cpus) * INSTANCES_PER_CORE
         except:
             cpus = psutil.cpu_count()
-        return len(total_process) < len(cpus) * INSTANCES_PER_CORE
+            return total_process < cpus * INSTANCES_PER_CORE
 
     def is_there_momery():
         mem = psutil.virtual_memory()
@@ -65,7 +66,7 @@ class ProcessManager:
 
     def run_process(self, process: Process):
         
-        #valid_cpu_resources(len(self.processes))
+        valid_cpu_resources(len(self.processes))
         valid_is_port_avaiable(
             list(map(lambda process: process.port, self.processes.values())),
             process.port
