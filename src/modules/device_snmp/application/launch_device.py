@@ -4,9 +4,11 @@ from modules.shared.infrastructure import logger
 from modules.device_snmp.infrastructure.command_lines import (
     exists_agent_folder,
     build_folder_for_dbs,
-    PATH_DBS,
     run_snmpsimd_agent,
 )
+
+from modules.device_snmp.infrastructure import PATH_DBS
+
 from modules.shared.infrastructure import process_manager
 
 

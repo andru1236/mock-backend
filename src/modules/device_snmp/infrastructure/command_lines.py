@@ -1,5 +1,5 @@
 import os
-from subprocess import getstatusoutput, Popen, run
+from subprocess import getstatusoutput, Popen
 from modules.shared.infrastructure import logger
 
 
@@ -16,9 +16,21 @@ def exists_agent_folder():
     return True if status_code == 0 else False
 
 
-def exists_db_for_device(device_guid):
-    status_code = getstatusoutput(f"ls {PATH_DBS}/{device_guid}")[0]
-    logger.debug(f"Exists folder {PATH_DBS} -> status {status_code}")
+def exists_db_for_device(folder_name):
+    status_code = getstatusoutput(f"ls {PATH_DBS}/{folder_name}")[0]
+    logger.debug(f"Check if exists folder {PATH_DBS} -> status {status_code}")
+    return True if status_code == 0 else False
+
+
+def create_agent_db_folder(folder_name):
+    status_code = getstatusoutput(f"mkdir {PATH_DBS}/{folder_name}")[0]
+    logger.debug(f"Create folder: {folder_name} in {PATH_DBS}")
+    return True if status_code == 0 else False
+
+
+def remove_agent_db_folder(folder_name):
+    status_code = getstatusoutput(f"rm -rf {PATH_DBS}/{folder_name}")[0]
+    logger.debug(f"Remove folder {folder_name} from {PATH_DBS}")
     return True if status_code == 0 else False
 
 
@@ -40,7 +52,7 @@ def get_python_path():
     code, path = getstatusoutput("which python")
     logger.debug(f"path python, status code{code}, path: {path}")
     # Replace for env
-    path = '/Users/andres.gutierrez/Projects/mock/mock-backend/pyenv/bin/python'
+    path = "/Users/andres.gutierrez/Projects/mock/mock-backend/pyenv/bin/python"
     path = os.environ.get("PYTHON_PATH") or path
     return path if path else None
 
@@ -58,9 +70,9 @@ def get_snmpsimd_path():
     return path if code == 0 else None
 
 
-####################
-####### MAIN #######
-####################
+########################
+####### SNMPSIMD #######
+########################
 
 
 def run_snmpsimd_agent(db_path, port):
@@ -75,6 +87,6 @@ def run_snmpsimd_agent(db_path, port):
     ip_and_port_param = f"--agent-udpv4-endpoint=127.0.0.1:{port}"
 
     cmd = [snmpsimd_script, data_param, ip_and_port_param]
-    
-    # return Popen(cmd, preexec_fn=os.setpgrp) 
-    return Popen(cmd) 
+
+    # return Popen(cmd, preexec_fn=os.setpgrp)
+    return Popen(cmd)
