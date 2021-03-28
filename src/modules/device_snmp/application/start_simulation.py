@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 
-from modules.shared.domain import IUseCase
+from modules.shared.domain import IUseCase, errors
 from modules.shared.infrastructure import process_manager, logger
 from ..infrastructure import file_manager, command_lines
+from ..domain import Device
 
 
 @dataclass
@@ -16,7 +17,11 @@ class StartSimulation(IUseCase):
 
     def execute(self, command: StartSimulationCommand) -> None:
         logger.info(f"Start to simulate the Device: {command.dev_id}")
-        dev = self.repository.search(command.dev_id)
+        dev: Device = self.repository.search(command.dev_id)
+
+        if dev.is_running:
+            raise errors.DomainBadRequestError(f"The device: {dev._id} is running")
+
         file_manager.mount_agent_db_for_device(dev._id, dev.agent_db)
 
         cli_process = command_lines.run_snmpsimd_agent(
@@ -32,9 +37,14 @@ class StartSimulation(IUseCase):
             dev.port,
             [],
             cli_process,
-            lambda: logger.info(f"process already was kicked off -> PID: {cli_process.pid}"),
+            lambda: logger.info(
+                f"process already was kicked off -> PID: {cli_process.pid}"
+            ),
             kill_process,
         )
 
         mgr = process_manager.ProcessManager()
         mgr.run_process(process)
+
+        dev.is_running = True
+        self.repository.save(dev)

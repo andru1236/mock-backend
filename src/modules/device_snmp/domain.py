@@ -17,6 +17,7 @@ def valid_port(port: int):
 class Device:
     agent_db: str
     port: int
+    is_running: bool = False
     _id: str = None
 
     def __post_init__(self):

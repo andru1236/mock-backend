@@ -31,7 +31,7 @@ def save(device: Device):
     return True
 
 
-def search(device_id: str):
+def search(device_id: str) -> Device:
     logger.info(f"Searching the device: {device_id}")
     device_dict = db.find_one({"_id": ObjectId(device_id)})
     if device_dict is None:
