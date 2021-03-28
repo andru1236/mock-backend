@@ -10,7 +10,7 @@ from modules.shared.infrastructure import logger
 PATH_DBS = (os.environ.get("PATH_AGENT_DBS") or os.getcwd()) + "/AGENT_DBS"
 
 
-def exists_agent_folder():
+def exists_root_folder():
     status_code = getstatusoutput(f"ls {PATH_DBS}")[0]
     logger.debug(f"Exists folder {PATH_DBS} -> status {status_code}")
     return True if status_code == 0 else False
@@ -33,9 +33,12 @@ def remove_agent_db_folder(folder_name):
     logger.debug(f"Remove folder {folder_name} from {PATH_DBS}")
     return True if status_code == 0 else False
 
+def get_path_db(folder_name):
+    return f"{PATH_DBS}/{folder_name}"
 
-def build_folder_for_dbs():
-    if exists_agent_folder() is False:
+
+def build_root_folder():
+    if exists_root_folder() is False:
         logger.debug(f"Creating folder in: {PATH_DBS}")
         status_code = getstatusoutput(f"mkdir {PATH_DBS}")[0]
         logger.debug(status_code)
