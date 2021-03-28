@@ -3,6 +3,7 @@ from modules.api_instance import command_bus, UpdateRouteCommand
 from modules.shared.infrastructure import logger
 
 
+# TODO Move to new module: exceptions in root of infrastructure
 class IntegrationError(DomainBaseError):
     pass
 

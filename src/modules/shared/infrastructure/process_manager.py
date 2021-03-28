@@ -8,6 +8,7 @@ from .utils import SingletonDecorator
 from .logger import logger
 
 
+# TODO Move all exceptions to new module exceptions in root infrastructure
 class NotEnoughResources(DomainBaseError):
     pass
 
