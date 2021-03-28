@@ -1,3 +1,4 @@
+import os
 from bson import ObjectId
 
 from modules.api_instance.domain import (
@@ -14,10 +15,11 @@ from modules.api_instance.domain import (
 from modules.shared.domain.errors import DomainBadRequestError, DomainDontFoundError
 from modules.shared.infrastructure import MongoConnection, logger
 
+COLLECTION_API=os.environ.get("COLLECTION_API") or "apis"
 
 class Repository(IRepository):
     __db = None
-    __name_repository = "apis"
+    __name_repository = COLLECTION_API
 
     def __init__(self) -> None:
         self.__db = MongoConnection.get_connection()

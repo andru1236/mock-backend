@@ -15,9 +15,9 @@ def valid_port(port: int):
 
 @dataclass
 class Device:
-    id: str
     agent_db: str
     port: int
+    _id: str = None
 
     def __post_init__(self):
         valid_port(self.port)

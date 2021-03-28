@@ -1,3 +1,4 @@
+import os
 from dataclasses import asdict
 from bson import ObjectId
 
@@ -7,10 +8,10 @@ from modules.shared.infrastructure.MongoConnection import MongoConnection
 from modules.shared.infrastructure import logger
 
 
-NAME_DB_COLLECTION = "responses"
+COLLECTION_RESPONSE = os.environ.get("COLLECTION_RESPONSE") or "responses"
 
 db = MongoConnection.get_connection()
-db = db[NAME_DB_COLLECTION]
+db = db[COLLECTION_RESPONSE]
 
 
 def _parse_id_to_str(mongo_result):
