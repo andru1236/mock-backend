@@ -24,27 +24,14 @@ class StartSimulation(IUseCase):
 
         file_manager.mount_agent_db_for_device(dev._id, dev.agent_db)
 
-        cli_process = command_lines.run_snmpsimd_agent(
-            command_lines.get_path_db(dev._id), dev.port
-        )
-
-        def kill_process():
-            cli_process.terminate()
-            cli_process.kill()
-
-        process = process_manager.Process(
-            dev._id,
-            dev.port,
-            [],
-            cli_process,
-            lambda: logger.info(
-                f"process already was kicked off -> PID: {cli_process.pid}"
-            ),
-            kill_process,
-        )
-
         mgr = process_manager.ProcessManager()
-        mgr.run_process(process)
+        mgr.run_cli_as_process(
+            dev._id,
+            command_lines.run_snmpsimd_agent,
+            (command_lines.get_path_db(dev._id), dev.port),
+            dev.port,
+            []
+        )
 
         dev.is_running = True
         self.repository.save(dev)

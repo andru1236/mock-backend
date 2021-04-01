@@ -1,7 +1,7 @@
-from modules.api_instance.domain import IRepository, BuilderServer
+from modules.api_instance.domain import IRepository
 from modules.api_instance.domain.exceptions import ServerNeverWasStarting
 from modules.shared.domain import ICommand, IResponse, IUseCase
-from modules.shared.infrastructure import logger
+from modules.shared.infrastructure import logger, process_manager
 
 
 class StopApiInstanceCommand(ICommand):
@@ -16,9 +16,11 @@ class StopApiInstance(IUseCase):
     def execute(self, command: StopApiInstanceCommand) -> None or IResponse:
         api = self.repository.search(command.api_id)
         logger.info(f"The api {api._id} in port {api.port.value} will be stopped")
+
         if api.settings.enabled is False:
             raise ServerNeverWasStarting(f"The never was starting")
+
         api.settings.enabled = False
         self.repository.save(api)
-        builder_server = BuilderServer()
-        builder_server.stop_api(command.api_id)
+
+        process_manager.ProcessManager().stop_process(api._id)
