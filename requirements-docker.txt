@@ -4,3 +4,4 @@ logzero
 flask-cors
 psutil
 snmpsim
+aenum
