@@ -22,7 +22,7 @@ def _parse_id_to_str(mongo_result):
 def save(device: Device):
     device_dict = asdict(device)
     device_dict = humps.camelize(device_dict)
-    del device_dict["_id"]
+    del device_dict["id"]
 
     if device.id is None:
         logger.info(f"Registering new device")
