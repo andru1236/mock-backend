@@ -12,7 +12,6 @@ from .Paths import Paths
 
 # Aggregate
 from .ApiInstance import ApiInstance
-from .BuilderServer import BuilderServer
 
 # Repositories
 from .IRepository import IRepository

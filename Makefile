@@ -2,6 +2,7 @@
 PORT=5000
 DB_NAME_MONGO=API_MOCK
 MONGO_CONNECTION=mongodb://localhost:27017/
+PYTHON_PATH=/home/andru1236/mock/mock-backend/pyenv/bin/python # CHANGE DEPEND OF YOUR LOCAL PATH
 
 start: run
 
@@ -15,7 +16,7 @@ run:
 
 ipython:
 	pyenv/bin/pip install jedi==0.17.2
-	cd src; PORT=$(PORT) DB_NAME_MONGO=$(DB_NAME_MONGO) MONGO_CONNECTION=$(MONGO_CONNECTION) ../pyenv/bin/ipython
+	cd src; PYTHON_PATH=$(PYTHON_PATH) PORT=$(PORT) DB_NAME_MONGO=$(DB_NAME_MONGO) MONGO_CONNECTION=$(MONGO_CONNECTION) ../pyenv/bin/ipython
 
 
 clean: clean-pyc clean-env
