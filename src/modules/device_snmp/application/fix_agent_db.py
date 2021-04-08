@@ -19,7 +19,8 @@ class FixAgentDb(IUseCase):
         parser = snmp_object_parser.SnmpObjectParser()
 
         try:
-            fixed_agent_db = parser.get_fixed_rows(command.agent_db)
+            file_rows = parser.get_fixed_rows(command.agent_db.split("\n"))
+            fixed_agent_db = "\n".join(file_rows)
         except Exception as error:
             logger.error(f"There is an error when the system tried to fix the rows")
             raise error

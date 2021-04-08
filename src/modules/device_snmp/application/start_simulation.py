@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from modules.shared.domain import IUseCase, errors
 from modules.shared.infrastructure import process_manager, logger
-from ..infrastructure import file_manager, command_lines
+from ..infrastructure import file_manager, command_lines, snmp_object_parser
 from ..domain import Device
 
 
@@ -22,7 +22,19 @@ class StartSimulation(IUseCase):
         if dev.is_running:
             raise errors.DomainBadRequestError(f"The device: {dev.id} is running")
 
-        file_manager.mount_agent_db_for_device(dev.id, dev.agent_db)
+        parser = snmp_object_parser.SnmpObjectParser()
+
+        logger.info("Parsing to the rec file to mount the device")
+        agent_db_to_mount = dev.agent_db
+        type_of_agent_db = parser.get_type_of_agent_db(agent_db_to_mount)
+
+        if type_of_agent_db == snmp_object_parser.SNMPWALK:
+            logger.info("The agent db is snmpwalk file")
+            file_rows = agent_db_to_mount.split("\n")
+            fixed_rows = parser.parse_walk_to_rec(file_rows)
+            agent_db_to_mount = "\n".join(fixed_rows)
+
+        file_manager.mount_agent_db_for_device(dev.id, agent_db_to_mount)
 
         mgr = process_manager.ProcessManager()
         mgr.run_cli_as_process(

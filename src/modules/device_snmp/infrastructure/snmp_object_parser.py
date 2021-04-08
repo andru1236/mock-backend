@@ -2,6 +2,10 @@ import re
 from enum import Enum
 from aenum import MultiValueEnum
 
+SNMPREC = 1
+SNMPWALK = 2
+WALK = 3
+
 
 class Validator(object):
     SNMPREC_ROW_PATTERN = r'^[0-9\.]+\|+[0-9x]+\|+[a-zA-Z0-9]{0,}'
@@ -188,6 +192,14 @@ class SnmpObjectParser(object):
             walk_row = self.REC_TYPE_FORMAT.format(snmp_iod_value, snmp_object_type, snmp_object_value)
             generated_rows.append(walk_row)
         return generated_rows
+
+    def get_type_of_agent_db(self, agent_db):
+        file_rows = agent_db.split("\n")
+        pattern = self.validator.get_row_format_pattern(file_rows[0])
+        if pattern == self.validator.SNMPREC_ROW_PATTERN:
+            return SNMPREC
+        if pattern == self.validator.SNMPWALK_ROW_PATTERN:
+            return SNMPWALK
 
     def __parse_oid(self, oid):
         oid_list = self.__get_splited_oid(oid)
