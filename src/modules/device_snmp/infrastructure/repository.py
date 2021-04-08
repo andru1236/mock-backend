@@ -1,4 +1,5 @@
 import os
+import humps
 
 from dataclasses import asdict
 
@@ -20,14 +21,15 @@ def _parse_id_to_str(mongo_result):
 
 def save(device: Device):
     device_dict = asdict(device)
+    device_dict = humps.camelize(device_dict)
     del device_dict["_id"]
 
-    if device._id is None:
+    if device.id is None:
         logger.info(f"Registering new device")
         db.insert(device_dict)
         return True
-    logger.info(f"Updating the device: {device._id}")
-    db.update_one({"_id": ObjectId(device._id)}, {"$set": device_dict})    
+    logger.info(f"Updating the device: {device.id}")
+    db.update_one({"_id": ObjectId(device.id)}, {"$set": device_dict})
     return True
 
 
@@ -37,4 +39,9 @@ def search(device_id: str) -> Device:
     if device_dict is None:
         raise errors.DomainDontFoundError(f"The device:{device_id} does not exists")
     _parse_id_to_str(device_dict)
-    return Device(**device_dict)
+
+    device_dict_underscode = humps.decamelize(device_dict)
+    device_dict_underscode['id'] = device_dict['_id']
+    del device_dict_underscode['_id']
+
+    return Device(**device_dict_underscode)

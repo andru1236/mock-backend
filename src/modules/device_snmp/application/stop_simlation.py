@@ -22,7 +22,7 @@ class StopSimulation(IUseCase):
 
         if not dev.is_running:
             raise errors.DomainBadRequestError(
-                f"The device: {dev._id} never started to running"
+                f"The device: {dev.id} never started to running"
             )
         mgr = process_manager.ProcessManager()
         mgr.stop_process(command.dev_id)

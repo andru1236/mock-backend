@@ -20,15 +20,15 @@ class StartSimulation(IUseCase):
         dev: Device = self.repository.search(command.dev_id)
 
         if dev.is_running:
-            raise errors.DomainBadRequestError(f"The device: {dev._id} is running")
+            raise errors.DomainBadRequestError(f"The device: {dev.id} is running")
 
-        file_manager.mount_agent_db_for_device(dev._id, dev.agent_db)
+        file_manager.mount_agent_db_for_device(dev.id, dev.agent_db)
 
         mgr = process_manager.ProcessManager()
         mgr.run_cli_as_process(
-            dev._id,
+            dev.id,
             command_lines.run_snmpsimd_agent,
-            (command_lines.get_path_db(dev._id), dev.port),
+            (command_lines.get_path_db(dev.id), dev.port),
             dev.port,
             []
         )
