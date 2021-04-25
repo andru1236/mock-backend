@@ -12,10 +12,10 @@ class MongoConnection(IPersistenceConnection):
     def get_connection(cls):
         if cls.__db is None:
             mongo_link = MongoClient(str(os.environ.get('MONGO_CONNECTION')))
-            cls.__db = mongo_link[str(os.environ.get('DB_NAME_MONGO'))]
+            cls.__db = mongo_link[str(os.environ.get('MONGO_DB'))]
         return cls.__db
 
     @classmethod
     def restart_data_base(cls):
         mongo_link = MongoClient(str(os.environ.get('MONGO_CONNECTION')))
-        mongo_link.drop_database(str(os.environ.get('DB_NAME_MONGO')))
+        mongo_link.drop_database(str(os.environ.get('MONGO_DB')))
