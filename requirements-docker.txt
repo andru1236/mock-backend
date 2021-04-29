@@ -6,3 +6,4 @@ psutil
 snmpsim
 aenum
 humps
+grpcio

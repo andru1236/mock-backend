@@ -6,5 +6,5 @@ RUN pip install -r requirements-docker.txt
 
 COPY src /app
 
-CMD ["python", "main.py"]
+CMD ["python", "run_api_rest.py"]
 

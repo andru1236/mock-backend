@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+
+message entityId {
+    string id = 1;
+}
+
+
+message response {
+    bool sucessfull = 1;
+    string message = 2;
+}
+
+service Simulator {
+    rpc startDeviceSimulation(entityId) returns (response);
+}
