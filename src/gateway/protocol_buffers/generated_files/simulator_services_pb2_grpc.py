@@ -16,8 +16,18 @@ class SimulatorStub(object):
         """
         self.startDeviceSimulation = channel.unary_unary(
                 '/Simulator/startDeviceSimulation',
-                request_serializer=gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.entityId.SerializeToString,
-                response_deserializer=gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.response.FromString,
+                request_serializer=gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.EntityId.SerializeToString,
+                response_deserializer=gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.Response.FromString,
+                )
+        self.stopDeviceSimulation = channel.unary_unary(
+                '/Simulator/stopDeviceSimulation',
+                request_serializer=gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.EntityId.SerializeToString,
+                response_deserializer=gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.Response.FromString,
+                )
+        self.fixDbAgent = channel.unary_unary(
+                '/Simulator/fixDbAgent',
+                request_serializer=gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.DbAgent.SerializeToString,
+                response_deserializer=gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.DbAgent.FromString,
                 )
 
 
@@ -30,13 +40,35 @@ class SimulatorServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def stopDeviceSimulation(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def fixDbAgent(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_SimulatorServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'startDeviceSimulation': grpc.unary_unary_rpc_method_handler(
                     servicer.startDeviceSimulation,
-                    request_deserializer=gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.entityId.FromString,
-                    response_serializer=gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.response.SerializeToString,
+                    request_deserializer=gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.EntityId.FromString,
+                    response_serializer=gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.Response.SerializeToString,
+            ),
+            'stopDeviceSimulation': grpc.unary_unary_rpc_method_handler(
+                    servicer.stopDeviceSimulation,
+                    request_deserializer=gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.EntityId.FromString,
+                    response_serializer=gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.Response.SerializeToString,
+            ),
+            'fixDbAgent': grpc.unary_unary_rpc_method_handler(
+                    servicer.fixDbAgent,
+                    request_deserializer=gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.DbAgent.FromString,
+                    response_serializer=gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.DbAgent.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -60,7 +92,41 @@ class Simulator(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Simulator/startDeviceSimulation',
-            gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.entityId.SerializeToString,
-            gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.response.FromString,
+            gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.EntityId.SerializeToString,
+            gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def stopDeviceSimulation(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Simulator/stopDeviceSimulation',
+            gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.EntityId.SerializeToString,
+            gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def fixDbAgent(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Simulator/fixDbAgent',
+            gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.DbAgent.SerializeToString,
+            gateway_dot_protocol__buffers_dot_generated__files_dot_simulator__services__pb2.DbAgent.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

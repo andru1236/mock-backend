@@ -1,21 +1,13 @@
+import os
 import grpc
 from concurrent import futures
-
-from .generated_files import (
-    simulator_services_pb2_grpc as infrastructure_simulator_services,
-    simulator_services_pb2 as dto_simulator_service,
-)
-
-from backend.api_instance import query_bus, SearchApiQuery
 from backend.shared.infrastructure import logger
 
+from .generated_files import simulator_services_pb2_grpc as infrastructure_simulator_services
+from .entry_points import SilumationService
 
-class SilumationService(infrastructure_simulator_services.SimulatorServicer):
-    def startDeviceSimulation(self, request, context):
-        logger.info("GRPC started device simulation")
-        response = query_bus.execute(SearchApiQuery(request.id))
-        logger.info(f"Response:\n {response}")  
-        return dto_simulator_service.Response(sucessfull=True, message=str(response))
+
+PORT = os.environ.get('GRPC_PORT') or 5001
 
 
 def start():
@@ -23,6 +15,8 @@ def start():
     infrastructure_simulator_services.add_SimulatorServicer_to_server(
         SilumationService(), server
     )
-    server.add_insecure_port("[::]:5001")
+    logger.info(f"Starting run the server GRPC in port: {PORT}")
+    server.add_insecure_port(f"[::]:{PORT}")
     server.start()
+    logger.info("The GRPC is running sucessfull")
     server.wait_for_termination()

@@ -55,7 +55,7 @@ def get_python_path():
     code, path = getstatusoutput("which python")
     logger.debug(f"path python, status code{code}, path: {path}")
     # Replace for env
-    path = "/Users/andres.gutierrez/Projects/mock/mock-api_rest/pyenv/bin/python"
+    #path = "/Users/andres.gutierrez/Projects/mock/mock-api_rest/pyenv/bin/python"
     path = os.environ.get("PYTHON_PATH") or path
     return path if path else None
 

@@ -5,5 +5,5 @@ flask-cors
 psutil
 snmpsim
 aenum
-humps
+pyhumps
 grpcio

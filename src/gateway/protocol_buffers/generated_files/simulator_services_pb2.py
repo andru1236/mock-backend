@@ -19,22 +19,22 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\nAgateway/protocol_buffers/generated_files/simulator_services.proto\"\x16\n\x08\x65ntityId\x12\n\n\x02id\x18\x01 \x01(\t\"/\n\x08response\x12\x12\n\nsucessfull\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t2:\n\tSimulator\x12-\n\x15startDeviceSimulation\x12\t.entityId\x1a\t.responseb\x06proto3'
+  serialized_pb=b'\nAgateway/protocol_buffers/generated_files/simulator_services.proto\"\x16\n\x08\x45ntityId\x12\n\n\x02id\x18\x01 \x01(\t\"\x1a\n\x07\x44\x62\x41gent\x12\x0f\n\x07\x64\x62\x41gent\x18\x01 \x01(\t\"/\n\x08Response\x12\x12\n\nsucessfull\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t2\x8a\x01\n\tSimulator\x12-\n\x15startDeviceSimulation\x12\t.EntityId\x1a\t.Response\x12,\n\x14stopDeviceSimulation\x12\t.EntityId\x1a\t.Response\x12 \n\nfixDbAgent\x12\x08.DbAgent\x1a\x08.DbAgentb\x06proto3'
 )
 
 
 
 
 _ENTITYID = _descriptor.Descriptor(
-  name='entityId',
-  full_name='entityId',
+  name='EntityId',
+  full_name='EntityId',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='entityId.id', index=0,
+      name='id', full_name='EntityId.id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -57,24 +57,17 @@ _ENTITYID = _descriptor.Descriptor(
 )
 
 
-_RESPONSE = _descriptor.Descriptor(
-  name='response',
-  full_name='response',
+_DBAGENT = _descriptor.Descriptor(
+  name='DbAgent',
+  full_name='DbAgent',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='sucessfull', full_name='response.sucessfull', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='message', full_name='response.message', index=1,
-      number=2, type=9, cpp_type=9, label=1,
+      name='dbAgent', full_name='DbAgent.dbAgent', index=0,
+      number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -92,26 +85,73 @@ _RESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=93,
-  serialized_end=140,
+  serialized_end=119,
 )
 
-DESCRIPTOR.message_types_by_name['entityId'] = _ENTITYID
-DESCRIPTOR.message_types_by_name['response'] = _RESPONSE
+
+_RESPONSE = _descriptor.Descriptor(
+  name='Response',
+  full_name='Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='sucessfull', full_name='Response.sucessfull', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='message', full_name='Response.message', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=121,
+  serialized_end=168,
+)
+
+DESCRIPTOR.message_types_by_name['EntityId'] = _ENTITYID
+DESCRIPTOR.message_types_by_name['DbAgent'] = _DBAGENT
+DESCRIPTOR.message_types_by_name['Response'] = _RESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-entityId = _reflection.GeneratedProtocolMessageType('entityId', (_message.Message,), {
+EntityId = _reflection.GeneratedProtocolMessageType('EntityId', (_message.Message,), {
   'DESCRIPTOR' : _ENTITYID,
   '__module__' : 'gateway.protocol_buffers.generated_files.simulator_services_pb2'
-  # @@protoc_insertion_point(class_scope:entityId)
+  # @@protoc_insertion_point(class_scope:EntityId)
   })
-_sym_db.RegisterMessage(entityId)
+_sym_db.RegisterMessage(EntityId)
 
-response = _reflection.GeneratedProtocolMessageType('response', (_message.Message,), {
+DbAgent = _reflection.GeneratedProtocolMessageType('DbAgent', (_message.Message,), {
+  'DESCRIPTOR' : _DBAGENT,
+  '__module__' : 'gateway.protocol_buffers.generated_files.simulator_services_pb2'
+  # @@protoc_insertion_point(class_scope:DbAgent)
+  })
+_sym_db.RegisterMessage(DbAgent)
+
+Response = _reflection.GeneratedProtocolMessageType('Response', (_message.Message,), {
   'DESCRIPTOR' : _RESPONSE,
   '__module__' : 'gateway.protocol_buffers.generated_files.simulator_services_pb2'
-  # @@protoc_insertion_point(class_scope:response)
+  # @@protoc_insertion_point(class_scope:Response)
   })
-_sym_db.RegisterMessage(response)
+_sym_db.RegisterMessage(Response)
 
 
 
@@ -122,8 +162,8 @@ _SIMULATOR = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=142,
-  serialized_end=200,
+  serialized_start=171,
+  serialized_end=309,
   methods=[
   _descriptor.MethodDescriptor(
     name='startDeviceSimulation',
@@ -132,6 +172,26 @@ _SIMULATOR = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_ENTITYID,
     output_type=_RESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='stopDeviceSimulation',
+    full_name='Simulator.stopDeviceSimulation',
+    index=1,
+    containing_service=None,
+    input_type=_ENTITYID,
+    output_type=_RESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='fixDbAgent',
+    full_name='Simulator.fixDbAgent',
+    index=2,
+    containing_service=None,
+    input_type=_DBAGENT,
+    output_type=_DBAGENT,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),

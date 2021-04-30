@@ -35,7 +35,7 @@ def save(device: Device):
 
 def search(device_id: str) -> Device:
     logger.info(f"Searching the device: {device_id}")
-    device_dict = db.find_one({"_id": ObjectId(device_id)})
+    device_dict = db.find_one({"_id": ObjectId(device_id)}, {"name": 0})
     if device_dict is None:
         raise errors.DomainDontFoundError(f"The device:{device_id} does not exists")
     _parse_id_to_str(device_dict)

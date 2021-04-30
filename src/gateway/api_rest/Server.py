@@ -23,4 +23,4 @@ class Server:
             self.flask_server.register_blueprint(api)
 
     def run(self):
-        self.flask_server.run("0.0.0.0", port=os.environ.get("PORT"))
+        self.flask_server.run("0.0.0.0", port=os.environ.get("API_REST_PORT"))
