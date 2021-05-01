@@ -22,6 +22,9 @@ class StartSimulation(IUseCase):
         if dev.is_running:
             raise errors.DomainBadRequestError(f"The device: {dev.id} is running")
 
+        if dev.agent_db is None:
+            raise errors.DomainBadRequestError(f"The device: {dev.id} does not have DB to simulate")
+
         parser = snmp_object_parser.SnmpObjectParser()
 
         logger.info("Parsing to the rec file to mount the device")
