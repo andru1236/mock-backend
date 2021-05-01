@@ -6,6 +6,10 @@ COLLECTION_RESPONSE=responses
 COLLECTION_DEVICE=devices
 MONGO_CONNECTION=mongodb://localhost:27017/
 PYTHON_PATH=/home/andru1236/mock/mock-backend/pyenv/bin/python # CHANGE DEPEND OF YOUR LOCAL PATH
+# Docker
+IMAGE_NAME_BE?=mock-backend
+CONTAINER_NAME_BE_REST_API?=mock-backend-rest-container
+CONTAINER_NAME_BE_GRPC?=mock-backend-grpc-container
 
 start: run-rest
 
@@ -67,6 +71,16 @@ gen-proto:
 
 test:
 	pyenv/bin/pytest -vv
+
+docker-build:
+	docker-compose -f docker/docker-compose.yml build --no-cache
+
+docker-start:
+	docker-compose -f docker/docker-compose.yml up 
+
+docker-clean:
+	docker-compose -f docker/docker-compose.yml down
+	docker rmi ${IMAGE_NAME_BE}
 
 
 .PHONY: install start clean

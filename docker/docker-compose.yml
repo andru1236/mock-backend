@@ -1,0 +1,40 @@
+version: '3.4'
+
+networks:
+  app-network:
+    driver: bridge
+
+x-base-be-config: &be-config
+  env_file: ../.env
+  build:
+    context: ..
+    dockerfile: docker/Dockerfile
+  image: ${IMAGE_NAME_BE}
+  depends_on: 
+    - mongo-db
+  networks:
+    - app-network
+
+services:
+  mock-backend-rest:
+    <<: *be-config
+    container_name: ${CONTAINER_NAME_BE_REST_API}
+    ports:
+      - ${API_REST_PORT}:${API_REST_PORT}
+    command: ["python", "run_api_rest.py"]
+
+  mock-backend-gpc:
+    <<: *be-config
+    container_name: ${CONTAINER_NAME_BE_GRPC}
+    ports:
+      - ${GRPC_PORT}:${GRPC_PORT}
+    command: ["python", "run_grpc_server.py"]
+
+  mongo-db:
+    image: mongo
+    ports:
+      - 27017:27017
+    networks:
+      - app-network
+    volumes:
+      - ../../mongodata:/data/db

@@ -1,7 +1,10 @@
-FROM python:3.9-alpine
-RUN apk add --update gcc libc-dev linux-headers && rm -rf /var/cache/apk/*
+FROM python:3.9
+RUN apt-get install gcc libc-dev 
 WORKDIR /app
 COPY requirements-docker.txt /app
+
+RUN pip install --upgrade pip
+RUN	python -m pip install --upgrade setuptools
 RUN pip install -r requirements-docker.txt
 
 COPY src /app
