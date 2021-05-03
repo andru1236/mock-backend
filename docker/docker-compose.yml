@@ -23,7 +23,7 @@ services:
       - ${API_REST_PORT}:${API_REST_PORT}
     command: ["python", "run_api_rest.py"]
 
-  mock-backend-gpc:
+  mock-backend-grpc:
     <<: *be-config
     container_name: ${CONTAINER_NAME_BE_GRPC}
     ports:
